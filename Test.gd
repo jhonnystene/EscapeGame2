@@ -83,5 +83,5 @@ func _ready():
 	
 func _process(delta):
 	var pos = $Player.get_global_transform().origin
-	$UILayer/Control/PositionLabel.text = "XYZ: " + str(pos.x) + "," + str(pos.y) + "," + str(pos.z)
-	$UILayer/Control/FPSLabel.text = "FPS: " + str(Engine.get_frames_per_second())
+	$UILayer/DebugHUD/PositionLabel.text = "XYZ: " + str(pos.x) + "," + str(pos.y) + "," + str(pos.z)
+	$UILayer/DebugHUD/FPSLabel.text = "FPS: " + str(Engine.get_frames_per_second())

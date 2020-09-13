@@ -5,7 +5,7 @@
 [ext_resource path="res://SpaceEnvironment.tres" type="Environment" id=3]
 [ext_resource path="res://Ship.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=1]
 
 [node name="GameWorld" type="Spatial"]
 script = ExtResource( 2 )
@@ -22,7 +22,7 @@ current = true
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 6.44128, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.425479, 0.904968, 0, -0.904968, -0.425479, 0, 5.67541, 10.958 )
@@ -32,33 +32,100 @@ shadow_contact = 3.27
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="UILayer"]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="StatsHUD" type="ColorRect" parent="UILayer"]
+margin_left = 32.0
+margin_top = 368.0
+margin_right = 202.0
+margin_bottom = 568.0
+color = Color( 0.254902, 0.254902, 0.254902, 0.501961 )
+
+[node name="Label" type="Label" parent="UILayer/StatsHUD"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 78.0
+margin_bottom = 58.0
+text = "O2: 100%
+Temp: 28C
+Water Reclaimer OK
+Oxygen Reclaimer OK
+Thirst: 100%
+Hunger: 100%"
+
+[node name="DebugHUD" type="ColorRect" parent="UILayer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 532.0
+margin_bottom = 112.0
+color = Color( 0.254902, 0.254902, 0.254902, 0.501961 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InfoLabel" type="Label" parent="UILayer/Control"]
-margin_right = 456.0
-margin_bottom = 31.0
+[node name="InfoLabel" type="Label" parent="UILayer/DebugHUD"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 466.0
+margin_bottom = 41.0
 text = "Escape The Robots And Oh Gosh They're Coming Run 2: The Better One
 Copyright (c) 2020 Johnny Stene. Some Rights Reserved."
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PositionLabel" type="Label" parent="UILayer/Control"]
-margin_top = 32.0
-margin_right = 63.0
-margin_bottom = 46.0
+[node name="PositionLabel" type="Label" parent="UILayer/DebugHUD"]
+margin_left = 10.0
+margin_top = 42.0
+margin_right = 73.0
+margin_bottom = 56.0
 text = "XYZ: 0,0,0"
 
-[node name="FPSLabel" type="Label" parent="UILayer/Control"]
-margin_top = 46.0
-margin_right = 40.0
-margin_bottom = 60.0
+[node name="FPSLabel" type="Label" parent="UILayer/DebugHUD"]
+margin_left = 10.0
+margin_top = 56.0
+margin_right = 50.0
+margin_bottom = 70.0
 text = "FPS: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPRect" type="ColorRect" parent="UILayer"]
+margin_left = 384.0
+margin_top = 504.0
+margin_right = 640.0
+margin_bottom = 568.0
+color = Color( 0.254902, 0.254902, 0.254902, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UILayer/HPRect"]
+margin_left = 119.0
+margin_top = 10.0
+margin_right = 137.0
+margin_bottom = 24.0
+text = "HP"
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/HPRect"]
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 228.0
+margin_bottom = 46.0
+
+[node name="Crosshairs" type="ColorRect" parent="UILayer"]
+margin_left = 510.0
+margin_top = 297.0
+margin_right = 512.0
+margin_bottom = 303.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Crosshairs2" type="ColorRect" parent="UILayer/Crosshairs"]
+margin_left = -2.0
+margin_top = 2.0
+margin_right = 4.0
+margin_bottom = 4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
