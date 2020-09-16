@@ -1,10 +1,19 @@
 extends KinematicBody
 
-const GRAVITY = -24.8
+var hp = 100
+
+var suitTemp = 28
+var oxygen = 100
+var thirst = 100
+var hunger = 100
+var oxygenReclaimerHealth = 100
+var waterReclaimerHealth = 100
+
+const GRAVITY = -12.4
 var vel = Vector3()
-const MAX_SPEED = 20
-const JUMP_SPEED = 18
-const ACCEL = 4.5
+const MAX_SPEED = 10
+const JUMP_SPEED = 15
+const ACCEL = 2.5
 
 var dir = Vector3()
 
@@ -56,6 +65,11 @@ func process_input(delta):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
+	if(Input.is_action_just_pressed("attack")):
+		$RotationHelper/Camera/RayCast.force_raycast_update()
+		if($RotationHelper/Camera/RayCast.is_colliding()):
+			if("Rock" in $RotationHelper/Camera/RayCast.get_collider().name):
+				$RotationHelper/Camera/RayCast.get_collider().get_parent().do_attack()
 func process_movement(delta):
 	dir.y = 0
 	dir = dir.normalized()

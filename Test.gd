@@ -5,6 +5,7 @@ var color = Color(255, 0, 0)
 
 const TERRAIN_TYPE_ROCKY = 1
 const TERRAIN_TYPE_HILLY = 3
+const TERRAIN_TYPE_IN_BETWEEN = 5
 const TERRAIN_TYPE_FLAT = 20
 
 const TERRAIN_MULTIPLIER_NORMAL = 1
@@ -86,32 +87,51 @@ func createChunk(chunkX, chunkZ):
 		
 		var rock = testRock.instance()
 		rock.global_translate(Vector3(rockX, 0, rockZ))
+		#rock.global_rotate(Vector3(1, 1, 1), (randi()%30) - 15)
 		currentChunk.add_child(rock)
 
 func _ready():
 	randomize()
 	
-	var grassMaterial = load("res://material.tres")
-	
 	noise.seed = randi()
 	noise.octaves = 1
 	noise.persistence = 0.8
-	noise.period = TERRAIN_TYPE_HILLY
+	noise.period = TERRAIN_TYPE_IN_BETWEEN
 	
 func _process(delta):
 	var pos = $Player.get_global_transform().origin
 	$UILayer/DebugHUD/PositionLabel.text = "XYZ: " + str(pos.x) + "," + str(pos.y) + "," + str(pos.z)
 	$UILayer/DebugHUD/FPSLabel.text = "FPS: " + str(Engine.get_frames_per_second())
 	
+	var text = "O2: "
+	text += str($Player.oxygen) + "%\n"
+	text += "Temp: " + str($Player.suitTemp) + "C\n"
+	if($Player.waterReclaimerHealth > 80):
+		text += "Water Reclaimer OK\n"
+	elif($Player.waterReclaimerHealth > 40):
+		text += "Water Reclaimer DEG\n"
+	elif($Player.waterReclaimerHealth > 5):
+		text += "Water Reclaimer BAD\n"
+		
+	if($Player.oxygenReclaimerHealth > 80):
+		text += "Oxygen Reclaimer OK\n"
+	elif($Player.oxygenReclaimerHealth > 40):
+		text += "Oxygen Reclaimer DEG\n"
+	elif($Player.oxygenReclaimerHealth > 5):
+		text += "Oxygen Reclaimer BAD\n"
+	
+	text += "Thirst: " + str($Player.thirst) + "%\n"
+	text += "Hunger: " + str($Player.hunger) + "%\n"
+	$UILayer/StatsHUD/Label.text = text
+	
+	$UILayer/HPRect/ColorRect.rect_size.x = $Player.hp * 2
+	
 	var loadedChunksNeeded = []
 	var playerChunkPos = Vector2(floor(pos.x / ORIGINAL_CHUNK_SIZE), floor(pos.z / ORIGINAL_CHUNK_SIZE))
 	for x in range(-((RENDER_DISTANCE - 1) / 2), (RENDER_DISTANCE - 1) / 2):
 		for z in range(-((RENDER_DISTANCE - 1) / 2), (RENDER_DISTANCE - 1) / 2):
 			loadedChunksNeeded.append(Vector2(playerChunkPos.x + x, playerChunkPos.y + z))
-	
-	#print("Player is at " + str(pos) + " (Chunk " + str(playerChunkPos) + ")")
-	#print("Player is at " + str(playerChunkPos) + " so I need " + str(loadedChunksNeeded))
-	
+			
 	var keepChunks = []
 	for child in $Chunks.get_children():
 		for position in loadedChunksNeeded:
@@ -139,11 +159,7 @@ func _process(delta):
 			trash = false
 			
 		if(trash):
-			print("Trashing " + str(chunkPos) + "!")
-			if(chunkPos == playerChunkPos):
-				print("ERROR! Trying to trash player's chunk!")
 			child.queue_free()
 
 	for chunkPos in loadChunks:
-		print("Loading new chunk: " + str(chunkPos))
 		createChunk(chunkPos.x, chunkPos.y)
