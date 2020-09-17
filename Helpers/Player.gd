@@ -69,7 +69,7 @@ func process_input(delta):
 		$RotationHelper/Camera/RayCast.force_raycast_update()
 		if($RotationHelper/Camera/RayCast.is_colliding()):
 			if("Rock" in $RotationHelper/Camera/RayCast.get_collider().name):
-				$RotationHelper/Camera/RayCast.get_collider().get_parent().do_attack()
+				$RotationHelper/Camera/RayCast.get_collider().do_attack()
 func process_movement(delta):
 	dir.y = 0
 	dir = dir.normalized()

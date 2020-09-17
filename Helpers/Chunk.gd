@@ -1,7 +1,7 @@
 extends MeshInstance
 
 func init(vertices, UVs):
-	var grassMaterial = load("res://material.tres")
+	var grassMaterial = load("res://Materials/GroundMaterial.tres")
 	var generatedMesh = Mesh.new()
 	
 	var st = SurfaceTool.new()

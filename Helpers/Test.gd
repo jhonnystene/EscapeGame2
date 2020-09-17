@@ -23,8 +23,8 @@ const RENDER_DISTANCE = 9 # Must be odd and at least 3
 const NOISE_MULTIPLIER = TERRAIN_MULTIPLIER_NORMAL
 
 var noise = OpenSimplexNoise.new()
-var chunk = preload("res://Chunk.tscn")
-var testRock = preload("res://TestRock.tscn")
+var chunk = preload("res://Helpers/Chunk.tscn")
+var testRock = preload("res://World Objects/Minerals/TestRock.tscn")
 
 func getNoise(x, z):
 	if(TERRAIN_RESOLUTION == 1):

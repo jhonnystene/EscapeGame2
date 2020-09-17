@@ -1,60 +1,60 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://TestRockMaterial.tres" type="Material" id=1]
-[ext_resource path="res://TestRock.gd" type="Script" id=2]
+[ext_resource path="res://Materials/TestRockMaterial.tres" type="Material" id=1]
+[ext_resource path="res://World Objects/Minerals/TestRock.gd" type="Script" id=2]
 
-[sub_resource type="CubeMesh" id=1]
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 3, 1 )
+
+[sub_resource type="CubeMesh" id=2]
 material = ExtResource( 1 )
 size = Vector3( 2, 4, 2 )
 
-[sub_resource type="PrismMesh" id=2]
+[sub_resource type="PrismMesh" id=3]
 material = ExtResource( 1 )
 
-[sub_resource type="BoxShape" id=3]
-extents = Vector3( 1, 3, 1 )
-
-[node name="TestRock" type="MeshInstance"]
-transform = Transform( 0.82207, -0.424362, 0.379629, 0.247509, 0.866776, 0.432942, -0.512777, -0.261947, 0.817584, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="Rock" type="StaticBody"]
 script = ExtResource( 2 )
 
-[node name="TopBit" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="TopBit2" type="MeshInstance" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 3, 0 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="Rock" type="StaticBody" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="Rock"]
+[node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
-[node name="OmniLight" type="OmniLight" parent="."]
+[node name="TestRock2" type="MeshInstance" parent="."]
+transform = Transform( 0.82207, -0.424362, 0.379629, 0.247509, 0.866776, 0.432942, -0.512777, -0.261947, 0.817584, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="TopBit" type="MeshInstance" parent="TestRock2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="TopBit2" type="MeshInstance" parent="TestRock2"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 3, 0 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="OmniLight" type="OmniLight" parent="TestRock2"]
 light_color = Color( 0.898039, 0.0235294, 0.741176, 1 )
 light_energy = 3.41
 
-[node name="OmniLight2" type="OmniLight" parent="."]
+[node name="OmniLight2" type="OmniLight" parent="TestRock2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.41969, 2.50266, 0 )
 light_color = Color( 0.898039, 0.0235294, 0.741176, 1 )
 light_energy = 3.41
 
-[node name="OmniLight3" type="OmniLight" parent="."]
+[node name="OmniLight3" type="OmniLight" parent="TestRock2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11663, 2.50266, 0 )
 light_color = Color( 0.898039, 0.0235294, 0.741176, 1 )
 light_energy = 3.41
 
-[node name="OmniLight4" type="OmniLight" parent="."]
+[node name="OmniLight4" type="OmniLight" parent="TestRock2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235789, 2.50266, 3.10197 )
 light_color = Color( 0.898039, 0.0235294, 0.741176, 1 )
 light_energy = 3.41
 
-[node name="OmniLight5" type="OmniLight" parent="."]
+[node name="OmniLight5" type="OmniLight" parent="TestRock2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.235789, 2.50266, -2.6708 )
 light_color = Color( 0.898039, 0.0235294, 0.741176, 1 )
 light_energy = 3.41

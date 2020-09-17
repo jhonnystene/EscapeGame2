@@ -1,19 +1,19 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Player.gd" type="Script" id=1]
-[ext_resource path="res://Test.gd" type="Script" id=2]
-[ext_resource path="res://SpaceEnvironment.tres" type="Environment" id=3]
-[ext_resource path="res://Ship.tscn" type="PackedScene" id=4]
+[ext_resource path="res://World Environments/SpaceEnvironment.tres" type="Environment" id=1]
+[ext_resource path="res://Helpers/Player.gd" type="Script" id=2]
+[ext_resource path="res://Helpers/Test.gd" type="Script" id=3]
+[ext_resource path="res://World Objects/Ship.tscn" type="PackedScene" id=4]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 1, 1, 2 )
 
 [node name="GameWorld" type="Spatial"]
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 
 [node name="Player" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3113, 0 )
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 
 [node name="RotationHelper" type="Spatial" parent="Player"]
 
@@ -140,7 +140,7 @@ __meta__ = {
 }
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 3 )
+environment = ExtResource( 1 )
 
 [node name="Ship" parent="." instance=ExtResource( 4 )]
 transform = Transform( 0.65753, 0.487935, -0.574085, -0.282987, 0.866116, 0.412021, 0.698264, -0.108457, 0.707577, 18.4825, -2.81437, 19.4307 )
