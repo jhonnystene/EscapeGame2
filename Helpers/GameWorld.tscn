@@ -5,8 +5,9 @@
 [ext_resource path="res://Helpers/GameWorld.gd" type="Script" id=3]
 [ext_resource path="res://World Objects/Ship.tscn" type="PackedScene" id=4]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.1, 0.1, 1 )
+[sub_resource type="CapsuleShape" id=3]
+radius = 0.1
+height = 0.6
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 0.1, 0.1, 2 )
@@ -23,7 +24,7 @@ script = ExtResource( 2 )
 [node name="RotationHelper" type="Spatial" parent="Player"]
 
 [node name="Camera" type="Camera" parent="Player/RotationHelper"]
-transform = Transform( -1, 1.32734e-07, -2.9758e-07, 0, 0.913269, 0.407358, 3.25841e-07, 0.407358, -0.913268, 0, 1.04149, 0 )
+transform = Transform( -1, 1.32734e-07, -2.9758e-07, 0, 0.913269, 0.407358, 3.25841e-07, 0.407358, -0.913268, 0, 0.598283, 0 )
 current = true
 far = 25.0
 
@@ -33,7 +34,7 @@ cast_to = Vector3( 0, 0, -5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Player/CollisionShape"]
 visible = false

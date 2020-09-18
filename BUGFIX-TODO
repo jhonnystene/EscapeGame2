@@ -1,7 +1,2 @@
-- Fix bug where player doesn't go down when they should
-    - Maybe caused by ConvexPolygonShape not knowing where the bottom is?
-        - We could fix this by adjusting height of all vertices so very bottom is at Y=0, then transforming chunk to be at correct height
-            - This would be a bit of a pain in the ass to implement though
-
 - Fix bug where some chunks take forever to load in
     - No idea what's causing this

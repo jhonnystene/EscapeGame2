@@ -80,9 +80,10 @@ func createChunk(chunkX, chunkZ):
 		
 	for x in range(0, CHUNK_SIZE):
 		for z in range(0, CHUNK_SIZE):
-			vertices.append_array(getVertices(x + originX, z + originZ, -originX, -originZ))
+			var verts = getVertices(x + originX, z + originZ, -originX, -originZ)
+			vertices.append_array(verts)
 			UVs.append_array(getUVs(x + originX, z + originZ, -originX, -originZ))
-
+	
 	var currentChunk = chunk.instance()
 	currentChunk.init(originX, originZ, vertices, UVs)
 	currentChunk.name = str(chunkX) + "," + str(chunkZ)
