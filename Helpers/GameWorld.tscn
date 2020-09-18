@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World Environments/SpaceEnvironment.tres" type="Environment" id=1]
 [ext_resource path="res://Helpers/Player.gd" type="Script" id=2]
@@ -7,6 +7,9 @@
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.1, 0.1, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.1, 0.1, 2 )
 
 [node name="GameWorld" type="Spatial"]
 pause_mode = 2
@@ -18,10 +21,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3113, 0 )
 script = ExtResource( 2 )
 
 [node name="RotationHelper" type="Spatial" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4772, 0 )
 
 [node name="Camera" type="Camera" parent="Player/RotationHelper"]
-transform = Transform( -1, 1.32734e-07, -2.97581e-07, 0, 0.913268, 0.407358, 3.25841e-07, 0.407358, -0.913268, 0, 5.86163, 0 )
+transform = Transform( -1, 1.32734e-07, -2.9758e-07, 0, 0.913269, 0.407358, 3.25841e-07, 0.407358, -0.913268, 0, 1.04149, 0 )
 current = true
 far = 25.0
 
@@ -30,8 +32,13 @@ enabled = true
 cast_to = Vector3( 0, 0, -5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 6.44128, 0 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Player/CollisionShape"]
+visible = false
+mesh = SubResource( 2 )
+material/0 = null
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
