@@ -1,6 +1,6 @@
 extends MeshInstance
 
-func init(vertices, UVs):
+func init(originX, originZ, vertices, UVs):
 	var grassMaterial = load("res://Materials/GroundMaterial.tres")
 	var generatedMesh = Mesh.new()
 	
@@ -23,3 +23,5 @@ func init(vertices, UVs):
 	$StaticBody/CollisionShape.shape = collisionshape
 	
 	mesh = generatedMesh
+	
+	global_translate(Vector3(originX, 0, originZ))

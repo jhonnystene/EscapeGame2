@@ -9,7 +9,7 @@ var hunger = 100
 var oxygenReclaimerHealth = 100
 var waterReclaimerHealth = 100
 
-const GRAVITY = -12.4
+const GRAVITY = -24.8
 var vel = Vector3()
 const MAX_SPEED = 10
 const JUMP_SPEED = 15
@@ -98,6 +98,6 @@ func _input(event):
 	if(event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED):
 		camera.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-		var camera_rot = rotation_helper.rotation_degrees
+		var camera_rot = camera.rotation_degrees
 		camera_rot.x = clamp(camera_rot.x, -70, 70)
-		rotation_helper.rotation_degrees = camera_rot
+		camera.rotation_degrees = camera_rot

@@ -45,29 +45,29 @@ func getNoise(x, z):
 		return noise.get_noise_2d(x, z)
 	return noise.get_noise_2d(x, z) * (TERRAIN_RESOLUTION / 2)
 
-func getVertices(x, z):
+func getVertices(x, z, offsetX, offsetZ):
 	var vertices = PoolVector3Array()
 	
-	vertices.push_back(Vector3(x, getNoise(x, z), z))
-	vertices.push_back(Vector3(x + TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z), z))
-	vertices.push_back(Vector3(x, getNoise(x, z + TERRAIN_RESOLUTION), z + TERRAIN_RESOLUTION))
+	vertices.push_back(Vector3(x + offsetX, getNoise(x, z), z + offsetZ))
+	vertices.push_back(Vector3(x + offsetX + TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z), z + offsetZ))
+	vertices.push_back(Vector3(x + offsetX, getNoise(x, z + TERRAIN_RESOLUTION), z + offsetZ + TERRAIN_RESOLUTION))
 	
-	vertices.push_back(Vector3(x, getNoise(x, z + TERRAIN_RESOLUTION), z + TERRAIN_RESOLUTION))
-	vertices.push_back(Vector3(x + TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z), z))
-	vertices.push_back(Vector3(x + TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z + TERRAIN_RESOLUTION), z + TERRAIN_RESOLUTION))
+	vertices.push_back(Vector3(x + offsetX, getNoise(x, z + TERRAIN_RESOLUTION), z + offsetZ + TERRAIN_RESOLUTION))
+	vertices.push_back(Vector3(x + offsetX +TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z), z + offsetZ))
+	vertices.push_back(Vector3(x + offsetX +TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z + TERRAIN_RESOLUTION), z + offsetZ + TERRAIN_RESOLUTION))
 	
 	return vertices
 	
-func getUVs(x, z):
+func getUVs(x, z, offsetX, offsetZ):
 	var UVs = PoolVector2Array()
 	
-	UVs.push_back(Vector2(x, z))
-	UVs.push_back(Vector2(x + TERRAIN_RESOLUTION, z))
-	UVs.push_back(Vector2(x, z + TERRAIN_RESOLUTION))
+	UVs.push_back(Vector2(x + offsetX, z + offsetZ))
+	UVs.push_back(Vector2(x + offsetX + TERRAIN_RESOLUTION, z + offsetZ))
+	UVs.push_back(Vector2(x + offsetX, z + offsetZ + TERRAIN_RESOLUTION))
 	
-	UVs.push_back(Vector2(x, z + TERRAIN_RESOLUTION))
-	UVs.push_back(Vector2(x + TERRAIN_RESOLUTION, z))
-	UVs.push_back(Vector2(x + TERRAIN_RESOLUTION, z + TERRAIN_RESOLUTION))
+	UVs.push_back(Vector2(x + offsetX, z + offsetZ + TERRAIN_RESOLUTION))
+	UVs.push_back(Vector2(x + offsetX + TERRAIN_RESOLUTION, z + offsetZ))
+	UVs.push_back(Vector2(x + offsetX + TERRAIN_RESOLUTION, z + offsetZ + TERRAIN_RESOLUTION))
 	
 	return UVs
 
@@ -75,16 +75,16 @@ func createChunk(chunkX, chunkZ):
 	var vertices = PoolVector3Array()
 	var UVs = PoolVector2Array()
 	
-	for technicalX in range(chunkX * CHUNK_SIZE * TERRAIN_RESOLUTION, ((chunkX * CHUNK_SIZE) + CHUNK_SIZE) * TERRAIN_RESOLUTION):
-		for technicalZ in range(chunkZ * CHUNK_SIZE * TERRAIN_RESOLUTION, ((chunkZ * CHUNK_SIZE) + CHUNK_SIZE) * TERRAIN_RESOLUTION):
-			var x = technicalX #* TERRAIN_RESOLUTION
-			var z = technicalZ# * TERRAIN_RESOLUTION
-			
-			vertices.append_array(getVertices(x, z))
-			UVs.append_array(getUVs(x, z))
-			
+	var originX = chunkX * CHUNK_SIZE * TERRAIN_RESOLUTION
+	var originZ = chunkZ * CHUNK_SIZE * TERRAIN_RESOLUTION
+		
+	for x in range(0, CHUNK_SIZE):
+		for z in range(0, CHUNK_SIZE):
+			vertices.append_array(getVertices(x + originX, z + originZ, -originX, -originZ))
+			UVs.append_array(getUVs(x + originX, z + originZ, -originX, -originZ))
+
 	var currentChunk = chunk.instance()
-	currentChunk.init(vertices, UVs)
+	currentChunk.init(originX, originZ, vertices, UVs)
 	currentChunk.name = str(chunkX) + "," + str(chunkZ)
 	$Chunks.add_child(currentChunk)
 
@@ -151,20 +151,12 @@ func _process(delta):
 				loadChunks.append(position)
 	
 		for child in $Chunks.get_children():
-			var trash = true
 			var chunkPos = child.name.split(",")
 			var chunkX = int(chunkPos[0])
 			var chunkY = int(chunkPos[1].split("@")[0])
 			chunkPos = Vector2(chunkX, chunkY)
 			
-			if(chunkPos == playerChunkPos):
-				#print("Player in chunk! Not trashing!")
-				trash = false
-			
-			if(chunkPos in loadedChunksNeeded):
-				trash = false
-				
-			if(trash):
+			if not(chunkPos in loadedChunksNeeded):
 				child.queue_free()
 	
 		for chunkPos in loadChunks:
