@@ -1,32 +1,49 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Materials/ShipPaintMaterial.tres" type="Material" id=1]
-
+[ext_resource path="res://Materials/BlackShipPaintMaterial.tres" type="Material" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 material = ExtResource( 1 )
-size = Vector3( 6, 4, 24 )
+size = Vector3( 2, 3, 15 )
 
 [sub_resource type="CubeMesh" id=2]
 material = ExtResource( 1 )
-size = Vector3( 24, 2, 4 )
+size = Vector3( 2, 2, 15 )
 
-[sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.0431373, 0.407843, 0.501961, 0.572549 )
-roughness = 0.0
-clearcoat_enabled = true
-clearcoat = 1.0
-clearcoat_gloss = 1.0
+[sub_resource type="PrismMesh" id=3]
+material = ExtResource( 2 )
+size = Vector3( 1.9, 2, 1.9 )
+
+[sub_resource type="PrismMesh" id=8]
+material = ExtResource( 1 )
+left_to_right = 0.0
 
 [sub_resource type="PrismMesh" id=4]
-material = SubResource( 3 )
-size = Vector3( 4, 2, 6 )
+material = ExtResource( 2 )
+left_to_right = 1.0
+size = Vector3( 6, 1, 2 )
 
-[sub_resource type="BoxShape" id=6]
-extents = Vector3( 3, 2, 12 )
+[sub_resource type="PrismMesh" id=5]
+material = ExtResource( 1 )
+left_to_right = 1.0
+size = Vector3( 10, 1, 2 )
 
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 2, 1, 12 )
+[sub_resource type="PrismMesh" id=6]
+material = ExtResource( 1 )
+left_to_right = 1.0
+size = Vector3( 3, 1, 2 )
+
+[sub_resource type="PrismMesh" id=7]
+material = ExtResource( 1 )
+left_to_right = -0.1
+size = Vector3( 15, 4, 0.3 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 2, 2.5, 8 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 2, 0.2, 5 )
 
 [node name="Ship" type="StaticBody"]
 
@@ -34,19 +51,86 @@ extents = Vector3( 2, 1, 12 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="Wings" type="MeshInstance" parent="Body"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6 )
+[node name="Rocket" type="MeshInstance" parent="Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="Nose" type="MeshInstance" parent="Body"]
-transform = Transform( 2.65431e-14, 1.62921e-07, 1, 1, -1.62921e-07, 0, 1.62921e-07, 1, -1.62921e-07, 0, 0, 13 )
+[node name="RocketEnd" type="MeshInstance" parent="Body/Rocket"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -7 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RocketStart" type="MeshInstance" parent="Body/Rocket"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 8.5 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="Rocket2" type="MeshInstance" parent="Body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="RocketEnd" type="MeshInstance" parent="Body/Rocket2"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, -7 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="RocketStart" type="MeshInstance" parent="Body/Rocket2"]
+transform = Transform( -1.62921e-07, -1, 0, -1.62921e-07, 2.65431e-14, -1, 1, -1.62921e-07, -1.62921e-07, 0, 0, 8.5 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="Window" type="MeshInstance" parent="Body"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 2, 5.5 )
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-shape = SubResource( 6 )
+[node name="TopTriangle" type="MeshInstance" parent="Body"]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, 2, -2.5 )
+mesh = SubResource( 5 )
+material/0 = null
 
-[node name="CollisionShape2" type="CollisionShape" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 1, 6 )
-shape = SubResource( 5 )
+[node name="FrontTriangle" type="MeshInstance" parent="Body"]
+transform = Transform( 2.65431e-14, 1.62921e-07, 1, 1, -1.62921e-07, 0, 1.62921e-07, 1, -1.62921e-07, 0, 0, 8 )
+mesh = SubResource( 6 )
+material/0 = null
+
+[node name="TopWing" type="MeshInstance" parent="Body"]
+transform = Transform( -1.62921e-07, 0.939693, 0.34202, 0, 0.34202, -0.939693, -1, -1.53095e-07, -5.57221e-08, 4.5, 1.5, -2 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="BottomWing" type="MeshInstance" parent="Body/TopWing"]
+transform = Transform( 1, -6.32032e-07, 1.11444e-07, 5.558e-07, 0.766045, -0.642787, 3.20891e-07, 0.642787, 0.766045, 0, -1.00285, 2.75531 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="TopWing2" type="MeshInstance" parent="Body"]
+transform = Transform( 4.69111e-07, -0.939693, -0.34202, 1.11444e-07, -0.34202, 0.939693, -1, -4.78937e-07, -5.57221e-08, -4.5, -1.5, -2 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="BottomWing" type="MeshInstance" parent="Body/TopWing2"]
+transform = Transform( 1, -6.32032e-07, 1.11444e-07, 5.558e-07, 0.766045, -0.642787, 3.20891e-07, 0.642787, 0.766045, 0, -1.00285, 2.75531 )
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="BodyCollision" type="CollisionShape" parent="."]
+shape = SubResource( 9 )
+
+[node name="WingCollision" type="CollisionShape" parent="."]
+transform = Transform( 0.942979, -0.332852, 0, 0.332852, 0.942979, 0, 0, 0, 1, 4.93397, 1.68176, 0.833944 )
+shape = SubResource( 10 )
+
+[node name="WingCollision2" type="CollisionShape" parent="."]
+transform = Transform( 0.918467, 0.395498, 0, -0.395498, 0.918467, 0, 0, 0, 1, 4.93397, -1.69256, 0.833944 )
+shape = SubResource( 10 )
+
+[node name="WingCollision3" type="CollisionShape" parent="."]
+transform = Transform( 0.925653, -0.378374, 0, 0.378374, 0.925653, 0, 0, 0, 1, -4.98295, -1.69256, 0.833944 )
+shape = SubResource( 10 )
+
+[node name="WingCollision4" type="CollisionShape" parent="."]
+transform = Transform( 0.936678, 0.350191, 0, -0.350191, 0.936678, 0, 0, 0, 1, -4.98295, 1.62651, 0.833944 )
+shape = SubResource( 10 )

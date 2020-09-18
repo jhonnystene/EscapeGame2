@@ -1,45 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://World Environments/SpaceEnvironment.tres" type="Environment" id=1]
-[ext_resource path="res://Helpers/Player.gd" type="Script" id=2]
+[ext_resource path="res://World Objects/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Helpers/GameWorld.gd" type="Script" id=3]
 [ext_resource path="res://World Objects/Ship.tscn" type="PackedScene" id=4]
-
-[sub_resource type="CapsuleShape" id=3]
-radius = 0.1
-height = 0.6
-
-[sub_resource type="CubeMesh" id=2]
-size = Vector3( 0.1, 0.1, 2 )
 
 [node name="GameWorld" type="Spatial"]
 pause_mode = 2
 script = ExtResource( 3 )
 
-[node name="Player" type="KinematicBody" parent="."]
-pause_mode = 1
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.3113, 0 )
-script = ExtResource( 2 )
-
-[node name="RotationHelper" type="Spatial" parent="Player"]
-
-[node name="Camera" type="Camera" parent="Player/RotationHelper"]
-transform = Transform( -1, 1.32734e-07, -2.9758e-07, 0, 0.913269, 0.407358, 3.25841e-07, 0.407358, -0.913268, 0, 0.598283, 0 )
-current = true
-far = 25.0
-
-[node name="RayCast" type="RayCast" parent="Player/RotationHelper/Camera"]
-enabled = true
-cast_to = Vector3( 0, 0, -5 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="Player/CollisionShape"]
-visible = false
-mesh = SubResource( 2 )
-material/0 = null
+[node name="Player" parent="." instance=ExtResource( 2 )]
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 
@@ -287,6 +257,6 @@ align = 1
 environment = ExtResource( 1 )
 
 [node name="Ship" parent="." instance=ExtResource( 4 )]
-transform = Transform( 0.65753, 0.487935, -0.574085, -0.282987, 0.866116, 0.412021, 0.698264, -0.108457, 0.707577, 18.4825, -2.81437, 19.4307 )
+transform = Transform( -0.870186, -0.412507, 0.269469, -0.282987, 0.866116, 0.412021, -0.403353, 0.282279, -0.870417, 18.4825, -0.597152, 17.4463 )
 
 [node name="Chunks" type="Spatial" parent="."]
