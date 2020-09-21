@@ -127,6 +127,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Inventory" type="Control" parent="UILayer/NormalUI"]
+margin_left = 950.0
+margin_right = 990.0
+margin_bottom = 40.0
+
 [node name="InventoryUI" type="Control" parent="UILayer"]
 visible = false
 margin_right = 40.0

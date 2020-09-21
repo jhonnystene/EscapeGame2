@@ -1,0 +1,146 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Title/Setup.gd" type="Script" id=1]
+
+[node name="Setup" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TerrainResolution" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 126.0
+margin_bottom = 24.0
+text = "Terrain Resolution"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="TerrainResolution"]
+margin_left = 256.0
+margin_right = 1004.0
+margin_bottom = 16.0
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TerrainMultiplier" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 30.0
+margin_right = 126.0
+margin_bottom = 44.0
+text = "Terrain Multiplier"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="TerrainMultiplier"]
+margin_left = 256.0
+margin_right = 1004.0
+margin_bottom = 16.0
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TerrainType" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 50.0
+margin_right = 126.0
+margin_bottom = 64.0
+text = "Terrain Multiplier"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="TerrainType"]
+margin_left = 256.0
+margin_right = 1004.0
+margin_bottom = 16.0
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChunkSize" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 70.0
+margin_right = 126.0
+margin_bottom = 84.0
+text = "Chunk Size"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="ChunkSize"]
+margin_left = 256.0
+margin_right = 1004.0
+margin_bottom = 16.0
+min_value = 4.0
+max_value = 64.0
+value = 4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubchunkCollisionSize" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 90.0
+margin_right = 126.0
+margin_bottom = 104.0
+text = "Subchunk Collision Size"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="SubchunkCollisionSize"]
+margin_left = 256.0
+margin_right = 1004.0
+margin_bottom = 16.0
+min_value = 1.0
+max_value = 16.0
+value = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RenderDistance" type="Label" parent="."]
+margin_left = 10.0
+margin_top = 110.0
+margin_right = 160.0
+margin_bottom = 124.0
+text = "Render Distance"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="RenderDistance"]
+margin_left = 256.0
+margin_right = 1004.0
+margin_bottom = 16.0
+min_value = 3.0
+max_value = 65.0
+step = 2.0
+value = 4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayButton" type="Button" parent="."]
+margin_left = 10.0
+margin_top = 570.0
+margin_right = 1014.0
+margin_bottom = 590.0
+text = "Play"
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]

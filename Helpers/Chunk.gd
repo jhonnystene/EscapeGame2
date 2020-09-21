@@ -20,10 +20,9 @@ func init(originX, originZ, vertices, UVs):
 	
 	var triangleCount = len(vertices) / 3
 	var quadCount = triangleCount / 2
-	var chunkSize = sqrt(quadCount)
 	
-	var subchunkSize = 4
-	var subchunkCount = int(chunkSize / subchunkSize) * int(chunkSize / subchunkSize)
+	var subchunkSize =  Global.subchunkCollisionSize
+	var subchunkCount = int(Global.chunkSize / subchunkSize) * int(Global.chunkSize / subchunkSize)
 	
 	var vertexCountPerSubchunk = (subchunkSize * subchunkSize * 3 * 2)
 	

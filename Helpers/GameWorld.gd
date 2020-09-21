@@ -3,24 +3,11 @@ extends Spatial
 var mesh = Mesh.new()
 var color = Color(255, 0, 0)
 
-const TERRAIN_TYPE_ROCKY = 1
-const TERRAIN_TYPE_HILLY = 3
-const TERRAIN_TYPE_IN_BETWEEN = 5
-const TERRAIN_TYPE_FLAT = 20
-
-const TERRAIN_MULTIPLIER_NORMAL = 1
-const TERRAIN_MULTIPLIER_BIGBOI = 2
-const TERRAIN_MULTIPLIER_AMPLIFIED = 5
-
-const TERRAIN_RESOLUTION_PS1_HAGRID = 4
-const TERRAIN_RESOLUTION_COARSE = 2
-const TERRAIN_RESOLUTION_FINE = 1
-const TERRAIN_RESOLUTION = TERRAIN_RESOLUTION_FINE
-
-const ORIGINAL_CHUNK_SIZE = 16
-const CHUNK_SIZE = ORIGINAL_CHUNK_SIZE / TERRAIN_RESOLUTION
-const RENDER_DISTANCE = 9 # Must be odd and at least 3
-const NOISE_MULTIPLIER = TERRAIN_MULTIPLIER_NORMAL
+var CHUNK_SIZE = 0
+#var Global.chunkSize = Global.chunkSize
+#const CHUNK_SIZE = Global.chunkSize / Global.terrainResolution
+#const Global.renderDistance = 9 # Must be odd and at least 3
+#const NOISE_MULTIPLIER = TERRAIN_MULTIPLIER_NORMAL
 
 var noise = OpenSimplexNoise.new()
 var chunk = preload("res://Helpers/Chunk.tscn")
@@ -28,33 +15,50 @@ var testRock = preload("res://World Objects/Minerals/TestRock.tscn")
 var platinum = preload("res://World Objects/Minerals/Platinum.tscn")
 
 var inInventory = false
+var item = preload("res://Helpers/InventoryItem.tscn")
 
 func _ready():
+	CHUNK_SIZE = Global.chunkSize / Global.terrainResolution
 	randomize()
 	
 	noise.seed = randi()
 	noise.octaves = 1
 	noise.persistence = 0.8
-	noise.period = TERRAIN_TYPE_IN_BETWEEN
+	noise.period = Global.TERRAIN_TYPE_IN_BETWEEN
 	
 	$UILayer/NormalUI.show()
 	$UILayer/InventoryUI.hide()
+	
+	addInventoryItem(Global.ITEM_FLOOR)
+	addInventoryItem(Global.ITEM_DEBUG)
+	addInventoryItem(Global.ITEM_DEBUG)
+	addInventoryItem(Global.ITEM_DEBUG)
+	addInventoryItem(Global.ITEM_DEBUG)
+	addInventoryItem(Global.ITEM_DEBUG)
+	addInventoryItem(Global.ITEM_DEBUG)
+
+func addInventoryItem(id):
+	var instance = item.instance()
+	instance.id = id
+	instance.rect_position.y = 74 * len(Global.playerInventory)
+	Global.playerInventory.append(instance)
+	$UILayer/NormalUI/Inventory.add_child(instance)
 
 func getNoise(x, z):
-	if(TERRAIN_RESOLUTION == 1):
+	if(Global.terrainResolution == 1):
 		return noise.get_noise_2d(x, z)
-	return noise.get_noise_2d(x, z) * (TERRAIN_RESOLUTION / 2)
+	return noise.get_noise_2d(x, z) * (Global.terrainResolution / 2)
 
 func getVertices(x, z, offsetX, offsetZ):
 	var vertices = PoolVector3Array()
 	
 	vertices.push_back(Vector3(x + offsetX, getNoise(x, z), z + offsetZ))
-	vertices.push_back(Vector3(x + offsetX + TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z), z + offsetZ))
-	vertices.push_back(Vector3(x + offsetX, getNoise(x, z + TERRAIN_RESOLUTION), z + offsetZ + TERRAIN_RESOLUTION))
+	vertices.push_back(Vector3(x + offsetX + Global.terrainResolution, getNoise(x + Global.terrainResolution, z), z + offsetZ))
+	vertices.push_back(Vector3(x + offsetX, getNoise(x, z + Global.terrainResolution), z + offsetZ + Global.terrainResolution))
 	
-	vertices.push_back(Vector3(x + offsetX, getNoise(x, z + TERRAIN_RESOLUTION), z + offsetZ + TERRAIN_RESOLUTION))
-	vertices.push_back(Vector3(x + offsetX +TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z), z + offsetZ))
-	vertices.push_back(Vector3(x + offsetX +TERRAIN_RESOLUTION, getNoise(x + TERRAIN_RESOLUTION, z + TERRAIN_RESOLUTION), z + offsetZ + TERRAIN_RESOLUTION))
+	vertices.push_back(Vector3(x + offsetX, getNoise(x, z + Global.terrainResolution), z + offsetZ + Global.terrainResolution))
+	vertices.push_back(Vector3(x + offsetX +Global.terrainResolution, getNoise(x + Global.terrainResolution, z), z + offsetZ))
+	vertices.push_back(Vector3(x + offsetX +Global.terrainResolution, getNoise(x + Global.terrainResolution, z + Global.terrainResolution), z + offsetZ + Global.terrainResolution))
 	
 	return vertices
 	
@@ -62,12 +66,12 @@ func getUVs(x, z, offsetX, offsetZ):
 	var UVs = PoolVector2Array()
 	
 	UVs.push_back(Vector2(x + offsetX, z + offsetZ))
-	UVs.push_back(Vector2(x + offsetX + TERRAIN_RESOLUTION, z + offsetZ))
-	UVs.push_back(Vector2(x + offsetX, z + offsetZ + TERRAIN_RESOLUTION))
+	UVs.push_back(Vector2(x + offsetX + Global.terrainResolution, z + offsetZ))
+	UVs.push_back(Vector2(x + offsetX, z + offsetZ + Global.terrainResolution))
 	
-	UVs.push_back(Vector2(x + offsetX, z + offsetZ + TERRAIN_RESOLUTION))
-	UVs.push_back(Vector2(x + offsetX + TERRAIN_RESOLUTION, z + offsetZ))
-	UVs.push_back(Vector2(x + offsetX + TERRAIN_RESOLUTION, z + offsetZ + TERRAIN_RESOLUTION))
+	UVs.push_back(Vector2(x + offsetX, z + offsetZ + Global.terrainResolution))
+	UVs.push_back(Vector2(x + offsetX + Global.terrainResolution, z + offsetZ))
+	UVs.push_back(Vector2(x + offsetX + Global.terrainResolution, z + offsetZ + Global.terrainResolution))
 	
 	return UVs
 
@@ -75,8 +79,8 @@ func createChunk(chunkX, chunkZ):
 	var vertices = PoolVector3Array()
 	var UVs = PoolVector2Array()
 	
-	var originX = chunkX * CHUNK_SIZE * TERRAIN_RESOLUTION
-	var originZ = chunkZ * CHUNK_SIZE * TERRAIN_RESOLUTION
+	var originX = chunkX * CHUNK_SIZE * Global.terrainResolution
+	var originZ = chunkZ * CHUNK_SIZE * Global.terrainResolution
 		
 	for x in range(0, CHUNK_SIZE):
 		for z in range(0, CHUNK_SIZE):
@@ -90,14 +94,39 @@ func createChunk(chunkX, chunkZ):
 	$Chunks.add_child(currentChunk)
 
 	if(randi() % 50 + 1 == 5):
-		var rockX = randi()%CHUNK_SIZE + (chunkX * CHUNK_SIZE)
-		var rockZ = randi()%CHUNK_SIZE + (chunkZ * CHUNK_SIZE)
+		var rockX = int(randi())%int(CHUNK_SIZE) + (chunkX * CHUNK_SIZE)
+		var rockZ = int(randi())%int(CHUNK_SIZE) + (chunkZ * CHUNK_SIZE)
 
 		var rock = platinum.instance()
 		rock.global_translate(Vector3(rockX, 0, rockZ))
 		currentChunk.add_child(rock)
 	
 func _process(delta):
+	if(Input.is_action_just_pressed("scroll_down")):
+		Global.currentInventorySlotSelected += 1
+	
+	if(Input.is_action_just_pressed("scroll_up")):
+		Global.currentInventorySlotSelected -= 1
+		
+	if(Global.currentInventorySlotSelected >= len(Global.playerInventory) or Global.currentInventorySlotSelected < 0):
+		Global.currentInventorySlotSelected = 0
+			
+	$UILayer/NormalUI/Inventory.rect_position.y = int(($UILayer/NormalUI/Inventory.rect_position.y + (10 - (74 * Global.currentInventorySlotSelected))) / 2)
+	
+#	if($UILayer/NormalUI/Inventory.rect_position.y == int(10 - (74 * Global.currentInventorySlotSelected)) - 1):
+#		for inventoryItemIndex in range(0, len(Global.playerInventory)):
+#			if(inventoryItemIndex == Global.currentInventorySlotSelected):
+#				Global.playerInventory[inventoryItemIndex].show()
+#			else:
+#				Global.playerInventory[inventoryItemIndex].hide()
+#	else:
+#		for inventoryItemIndex in range(0, len(Global.playerInventory)):
+#			Global.playerInventory[inventoryItemIndex].show()
+	
+	if(Input.is_action_just_pressed("drop_to_menu")):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		get_tree().change_scene("res://Title/Setup.tscn")
+	
 	if(inInventory):
 		if(Input.is_action_just_pressed("inventory")):
 			inInventory = false
@@ -134,9 +163,9 @@ func _process(delta):
 		$UILayer/NormalUI/HPRect/ColorRect.rect_size.x = $Player.hp * 2
 		
 		var loadedChunksNeeded = []
-		var playerChunkPos = Vector2(floor(pos.x / ORIGINAL_CHUNK_SIZE), floor(pos.z / ORIGINAL_CHUNK_SIZE))
-		for x in range(-((RENDER_DISTANCE - 1) / 2), (RENDER_DISTANCE - 1) / 2):
-			for z in range(-((RENDER_DISTANCE - 1) / 2), (RENDER_DISTANCE - 1) / 2):
+		var playerChunkPos = Vector2(floor(pos.x / Global.chunkSize), floor(pos.z / Global.chunkSize))
+		for x in range(-((Global.renderDistance - 1) / 2), (Global.renderDistance - 1) / 2):
+			for z in range(-((Global.renderDistance - 1) / 2), (Global.renderDistance - 1) / 2):
 				loadedChunksNeeded.append(Vector2(playerChunkPos.x + x, playerChunkPos.y + z))
 				
 		var keepChunks = []
