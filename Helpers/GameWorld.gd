@@ -102,27 +102,6 @@ func createChunk(chunkX, chunkZ):
 		currentChunk.add_child(rock)
 	
 func _process(delta):
-	if(Input.is_action_just_pressed("scroll_down")):
-		Global.currentInventorySlotSelected += 1
-	
-	if(Input.is_action_just_pressed("scroll_up")):
-		Global.currentInventorySlotSelected -= 1
-		
-	if(Global.currentInventorySlotSelected >= len(Global.playerInventory) or Global.currentInventorySlotSelected < 0):
-		Global.currentInventorySlotSelected = 0
-			
-	$UILayer/NormalUI/Inventory.rect_position.y = int(($UILayer/NormalUI/Inventory.rect_position.y + (10 - (74 * Global.currentInventorySlotSelected))) / 2)
-	
-#	if($UILayer/NormalUI/Inventory.rect_position.y == int(10 - (74 * Global.currentInventorySlotSelected)) - 1):
-#		for inventoryItemIndex in range(0, len(Global.playerInventory)):
-#			if(inventoryItemIndex == Global.currentInventorySlotSelected):
-#				Global.playerInventory[inventoryItemIndex].show()
-#			else:
-#				Global.playerInventory[inventoryItemIndex].hide()
-#	else:
-#		for inventoryItemIndex in range(0, len(Global.playerInventory)):
-#			Global.playerInventory[inventoryItemIndex].show()
-	
 	if(Input.is_action_just_pressed("drop_to_menu")):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		get_tree().change_scene("res://Title/Setup.tscn")
