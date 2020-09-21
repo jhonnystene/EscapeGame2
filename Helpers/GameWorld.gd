@@ -4,12 +4,10 @@ var mesh = Mesh.new()
 var color = Color(255, 0, 0)
 
 var CHUNK_SIZE = 0
-#var Global.chunkSize = Global.chunkSize
-#const CHUNK_SIZE = Global.chunkSize / Global.terrainResolution
-#const Global.renderDistance = 9 # Must be odd and at least 3
-#const NOISE_MULTIPLIER = TERRAIN_MULTIPLIER_NORMAL
 
 var noise = OpenSimplexNoise.new()
+var biomeNoise = OpenSimplexNoise.new()
+
 var chunk = preload("res://Helpers/Chunk.tscn")
 var testRock = preload("res://World Objects/Minerals/TestRock.tscn")
 var platinum = preload("res://World Objects/Minerals/Platinum.tscn")
@@ -25,6 +23,11 @@ func _ready():
 	noise.octaves = 1
 	noise.persistence = 0.8
 	noise.period = Global.TERRAIN_TYPE_IN_BETWEEN
+	
+	biomeNoise.seed = randi()
+	noise.octaves = 1
+	noise.persistence = 0.8
+	noise.period = 3
 	
 	$UILayer/NormalUI.show()
 	$UILayer/InventoryUI.hide()
@@ -45,9 +48,18 @@ func addInventoryItem(id):
 	$UILayer/NormalUI/Inventory.add_child(instance)
 
 func getNoise(x, z):
+	var noiseValue = noise.get_noise_2d(x, z)
+	var biomeNoiseValue = abs(biomeNoise.get_noise_2d(floor(x / 10), floor(z / 10)) * 10)
+	
+	print(biomeNoiseValue)
+	if(biomeNoiseValue > 0.8):
+		noiseValue *= 1.5
+	else:
+		noiseValue *= 1
+	
 	if(Global.terrainResolution == 1):
-		return noise.get_noise_2d(x, z)
-	return noise.get_noise_2d(x, z) * (Global.terrainResolution / 2)
+		return noiseValue
+	return noiseValue * (Global.terrainResolution / 2)
 
 func getVertices(x, z, offsetX, offsetZ):
 	var vertices = PoolVector3Array()
