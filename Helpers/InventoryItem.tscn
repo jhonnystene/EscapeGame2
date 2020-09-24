@@ -24,3 +24,6 @@ margin_top = 45.0
 margin_right = 45.0
 margin_bottom = 59.0
 text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -11,6 +11,7 @@ var biomeNoise = OpenSimplexNoise.new()
 var chunk = preload("res://Helpers/Chunk.tscn")
 var testRock = preload("res://World Objects/Minerals/TestRock.tscn")
 var platinum = preload("res://World Objects/Minerals/Platinum.tscn")
+var gold = preload("res://World Objects/Minerals/Gold.tscn")
 
 var inInventory = false
 var item = preload("res://Helpers/InventoryItem.tscn")
@@ -101,11 +102,15 @@ func createChunk(chunkX, chunkZ):
 	currentChunk.name = str(chunkX) + "," + str(chunkZ)
 	$Chunks.add_child(currentChunk)
 
-	if(randi() % 50 + 1 == 5):
-		var rockX = int(randi())%int(CHUNK_SIZE) + (chunkX * CHUNK_SIZE)
-		var rockZ = int(randi())%int(CHUNK_SIZE) + (chunkZ * CHUNK_SIZE)
+	var rockX = int(randi())%int(CHUNK_SIZE) + (chunkX * CHUNK_SIZE)
+	var rockZ = int(randi())%int(CHUNK_SIZE) + (chunkZ * CHUNK_SIZE)
 
+	if(randi() % 50 + 1 == 5):
 		var rock = platinum.instance()
+		rock.global_translate(Vector3(rockX, 0, rockZ))
+		currentChunk.add_child(rock)
+	elif(randi() % 30 + 1 == 5):
+		var rock = gold.instance()
 		rock.global_translate(Vector3(rockX, 0, rockZ))
 		currentChunk.add_child(rock)
 	
