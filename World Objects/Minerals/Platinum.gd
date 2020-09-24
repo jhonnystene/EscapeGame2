@@ -7,3 +7,5 @@ func do_attack():
 	
 	if(durabilityLeft == 0):
 		queue_free()
+		return Global.ITEM_PLATINUM
+	return Global.ITEM_AIR

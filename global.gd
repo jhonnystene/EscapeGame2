@@ -23,6 +23,7 @@ var renderDistance = 11
 
 const ITEM_AIR = 0
 const ITEM_FLOOR = 1
+const ITEM_PLATINUM = 2
 
 const ITEM_DEBUG = 99
 

@@ -17,3 +17,10 @@ position = Vector2( 32, 32 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 40, 40 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 5.0
+margin_top = 45.0
+margin_right = 45.0
+margin_bottom = 59.0
+text = "1"

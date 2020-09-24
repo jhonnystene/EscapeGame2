@@ -24,6 +24,7 @@ far = 25.0
 [node name="RayCast" type="RayCast" parent="RotationHelper/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -5 )
+collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )

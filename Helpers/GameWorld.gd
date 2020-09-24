@@ -31,16 +31,13 @@ func _ready():
 	
 	$UILayer/NormalUI.show()
 	$UILayer/InventoryUI.hide()
-	
-	addInventoryItem(Global.ITEM_FLOOR)
-	addInventoryItem(Global.ITEM_DEBUG)
-	addInventoryItem(Global.ITEM_DEBUG)
-	addInventoryItem(Global.ITEM_DEBUG)
-	addInventoryItem(Global.ITEM_DEBUG)
-	addInventoryItem(Global.ITEM_DEBUG)
-	addInventoryItem(Global.ITEM_DEBUG)
 
 func addInventoryItem(id):
+	for item in Global.playerInventory:
+		if(item.id == id):
+			item.count += 1
+			return
+	
 	var instance = item.instance()
 	instance.id = id
 	instance.rect_position.y = 74 * len(Global.playerInventory)
@@ -51,7 +48,6 @@ func getNoise(x, z):
 	var noiseValue = noise.get_noise_2d(x, z)
 	var biomeNoiseValue = abs(biomeNoise.get_noise_2d(floor(x / 10), floor(z / 10)) * 10)
 	
-	print(biomeNoiseValue)
 	if(biomeNoiseValue > 0.8):
 		noiseValue *= 1.5
 	else:
