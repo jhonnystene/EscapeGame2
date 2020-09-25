@@ -14,8 +14,8 @@ func _process(delta):
 	Global.terrainResolution = $TerrainResolution/Slider.value
 	Global.terrainMultiplier = $TerrainMultiplier/Slider.value
 	Global.terrainType = $TerrainType/Slider.value
-	Global.chunkSize = $TerrainType/Slider.value
-	Global.subchunkCollisionSize = $TerrainType/Slider.value
+	Global.chunkSize = $ChunkSize/Slider.value
+	Global.subchunkCollisionSize = $SubchunkCollisionSize/Slider.value
 	Global.renderDistance = $RenderDistance/Slider.value
 
 func _on_PlayButton_pressed():

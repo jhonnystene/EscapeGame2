@@ -13,7 +13,7 @@ const TERRAIN_RESOLUTION_PS1_HAGRID = 4
 const TERRAIN_RESOLUTION_COARSE = 2
 const TERRAIN_RESOLUTION_FINE = 1
 
-var subchunkCollisionSize = 4
+var subchunkCollisionSize = 2
 var chunkSize = 16
 var terrainResolution = TERRAIN_RESOLUTION_FINE
 var terrainMultiplier = TERRAIN_MULTIPLIER_NORMAL
