@@ -24,13 +24,3 @@ func _process(delta):
 			Global.playerInventory[inventoryItemIndex].rect_position.x = int((Global.playerInventory[inventoryItemIndex].rect_position.x + goal) / 2)
 		else:
 			Global.playerInventory.remove(inventoryItemIndex)
-#	if($UILayer/NormalUI/Inventory.rect_position.y == int(10 - (74 * Global.currentInventorySlotSelected)) - 1):
-#		for inventoryItemIndex in range(0, len(Global.playerInventory)):
-#			if(inventoryItemIndex == Global.currentInventorySlotSelected):
-#				Global.playerInventory[inventoryItemIndex].show()
-#			else:
-#				Global.playerInventory[inventoryItemIndex].hide()
-#	else:
-#		for inventoryItemIndex in range(0, len(Global.playerInventory)):
-#			Global.playerInventory[inventoryItemIndex].show()
-	
