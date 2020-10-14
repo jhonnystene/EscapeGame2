@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var MOVE_SPEED = 20
+var MOVE_SPEED = 50
 var GRAVITY = 5
 var JUMP_SPEED = 100
 var verticalVelocity = 0
@@ -16,6 +16,8 @@ func _physics_process(delta):
 	else:
 		verticalVelocity += GRAVITY
 	
+	# This works around a quirk in the Godot physics engine that makes it
+	# damn near impossible to go up the slopes in the game.
 	$RayCast2D.force_raycast_update()
 	if($RayCast2D.is_colliding() and moveX > 0):
 		verticalVelocity = -5

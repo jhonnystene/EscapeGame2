@@ -13,3 +13,5 @@ script = ExtResource( 2 )
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 13.4931, -55.471 )
+
+[node name="Chunks" type="Node2D" parent="."]

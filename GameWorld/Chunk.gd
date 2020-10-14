@@ -3,6 +3,7 @@ extends Node2D
 var surfaceTool = SurfaceTool.new()
 	
 func generate(chunkX, noise):
+	name = str(chunkX)
 	surfaceTool.begin(Mesh.PRIMITIVE_LINES)
 	surfaceTool.add_color(Color(1, 1, 1))
 	var genX = chunkX * GlobalData.chunkSize
