@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://TitleScreen/MainMenu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 200.0
+text = "Escape The Robots And Oh Gosh They're Coming Run 2: The Better One"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGameButton" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 200.0
+margin_right = 640.0
+margin_bottom = 220.0
+text = "New Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadGameButton" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 225.0
+margin_right = 640.0
+margin_bottom = 245.0
+text = "Load Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsButton" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 250.0
+margin_right = 640.0
+margin_bottom = 270.0
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 275.0
+margin_right = 640.0
+margin_bottom = 295.0
+text = "Exit Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]

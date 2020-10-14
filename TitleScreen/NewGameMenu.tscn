@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://TitleScreen/NewGameMenu.gd" type="Script" id=1]
+
+[node name="NewGameMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NewGameLabel" type="Label" parent="."]
+margin_right = 1024.0
+margin_bottom = 200.0
+text = "New Game"
+align = 1
+valign = 1
+
+[node name="SeedLabel" type="Label" parent="."]
+margin_left = 384.0
+margin_top = 200.0
+margin_right = 640.0
+margin_bottom = 220.0
+text = "Seed"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SeedEntry" type="TextEdit" parent="."]
+margin_left = 384.0
+margin_top = 220.0
+margin_right = 640.0
+margin_bottom = 260.0
+
+[node name="CreateWorldButton" type="Button" parent="."]
+margin_left = 384.0
+margin_top = 265.0
+margin_right = 640.0
+margin_bottom = 285.0
+text = "Create World"
+[connection signal="pressed" from="CreateWorldButton" to="." method="_on_CreateWorldButton_pressed"]

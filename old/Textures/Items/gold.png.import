@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gold.png-1214ba747d1e7013d7e6c8caa5298683.stex"
+path="res://.import/gold.png-2705d8c7f85ebe0ee2e2f9cf48c5a4fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Textures/Items/gold.png"
-dest_files=[ "res://.import/gold.png-1214ba747d1e7013d7e6c8caa5298683.stex" ]
+source_file="res://old/Textures/Items/gold.png"
+dest_files=[ "res://.import/gold.png-2705d8c7f85ebe0ee2e2f9cf48c5a4fa.stex" ]
 
 [params]
 
