@@ -12,13 +12,14 @@ var testMineral = preload("res://GameWorld/Minerals/TestMineral.tscn")
 
 var itemIds = {}
 var craftingRecipies = {}
+var crafting_recipie = preload("res://UI/CraftingRecipie.tscn")
 
 var inventory = []
 var inventory_queue = []
 var inventory_item = preload("res://UI/InventoryItem.tscn")
 var inventory_item_selected = 0
 
-func add_inventory_item(itemId):
+func inventory_add_item(itemId):
 	for item in inventory:
 		if(item.id == itemId):
 			item.count += 1
@@ -28,6 +29,28 @@ func add_inventory_item(itemId):
 	item.count = 1
 	inventory_queue.append(item)
 
+func inventory_get_item_count(id):
+	var count = 0
+	for item in inventory:
+		if(item.id == id):
+			count = item.count
+			return count
+	return count
+
+func crafting_can_craft(id):
+	var recipie = craftingRecipies[id]
+	for neededItem in recipie:
+		if(inventory_get_item_count(neededItem) < recipie[neededItem]):
+			return false
+	return true
+
+func crafting_get_available_recipies():
+	var availableRecipies = []
+	for recipie in craftingRecipies:
+		if(crafting_can_craft(recipie)):
+			availableRecipies.append(recipie)
+	return availableRecipies
+
 func _ready():
 	randomize()
 	print("Initializing items...")
@@ -36,6 +59,7 @@ func _ready():
 
 	print("Initializing crafting...")
 	craftingRecipies["test_item"] = {"test_rock": 2}
+	craftingRecipies["test_rock"] = {"test_rock": 4}
 
 func create_world_seed(newSeed):
 	if not(newSeed):

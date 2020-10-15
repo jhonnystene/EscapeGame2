@@ -6,18 +6,6 @@ var JUMP_SPEED = 100
 var verticalVelocity = 0
 
 func _process(delta):
-	#$MiningRayCast.rotation_degrees
-	if(Input.is_action_just_pressed("scroll_up")):
-		GlobalData.inventory_item_selected -= 1
-		if(GlobalData.inventory_item_selected < 0):
-			GlobalData.inventory_item_selected = 0
-			
-	if(Input.is_action_just_pressed("scroll_down")):
-		GlobalData.inventory_item_selected += 1
-		if(GlobalData.inventory_item_selected > len(GlobalData.inventory) - 1):
-			GlobalData.inventory_item_selected = len(GlobalData.inventory) - 1
-			
-	
 	if(Input.is_action_pressed("attack")):
 		$MiningRayCast.visible = true
 		$MiningRayCast.cast_to = get_global_mouse_position()

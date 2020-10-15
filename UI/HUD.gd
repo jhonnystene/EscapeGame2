@@ -1,23 +1,50 @@
 extends Control
 
-func _ready():
-	GlobalData.add_inventory_item("test_item")
+var crafting = false
+var currentCraftingRecipieShown = 0
 
-func _process(delta):
+func inventory_handle_queue():
 	for item in GlobalData.inventory_queue:
 		$InventoryItems.add_child(item)
 		GlobalData.inventory.append(item)
 		GlobalData.inventory_queue.erase(item)
+
+func _process(delta):
+	var craftingRecipies = GlobalData.crafting_get_available_recipies()
+	if(Input.is_action_just_pressed("toggle_crafting")):
+		if(crafting):
+			crafting = false
+		else:
+			crafting = true
 	
-	for child in $InventoryItems.get_children():
-		for item in GlobalData.inventory:
-			if(item.id == child.id):
-				child.count = item.count
+	if(crafting):
+		if(Input.is_action_just_pressed("scroll_up")):
+			currentCraftingRecipieShown -= 1
+			if(currentCraftingRecipieShown < 0):
+				currentCraftingRecipieShown = 0
+		if(Input.is_action_just_pressed("scroll_down")):
+			currentCraftingRecipieShown += 1
+			if(currentCraftingRecipieShown > len(craftingRecipies) - 1):
+				currentCraftingRecipieShown = len(craftingRecipies) - 1
+			
+	else:
+		if(Input.is_action_just_pressed("scroll_up")):
+			GlobalData.inventory_item_selected -= 1
+			if(GlobalData.inventory_item_selected < 0):
+				GlobalData.inventory_item_selected = 0
 				
-				if(item.count):
-					child.visible = true
-				else:
-					child.visible = false
+		if(Input.is_action_just_pressed("scroll_down")):
+			GlobalData.inventory_item_selected += 1
+			if(GlobalData.inventory_item_selected > len(GlobalData.inventory) - 1):
+				GlobalData.inventory_item_selected = len(GlobalData.inventory) - 1
+				
+	inventory_handle_queue()
+	for child in $InventoryItems.get_children():
+		child.count = GlobalData.inventory_get_item_count(child.id)
+		if(child.count):
+			child.visible = true
+		else:
+			child.visible = false
 	
 	var vis_id = 0
 	var childList = $InventoryItems.get_children()
@@ -32,3 +59,25 @@ func _process(delta):
 				childList[child_id].goalX = 64
 				
 			vis_id += 1
+	
+	for recipie in craftingRecipies:
+			var exists = false
+			for child in $CraftingRecipies.get_children():
+				if(child.resultId == recipie):
+					exists = true
+			
+			if not exists:
+				var instance = GlobalData.crafting_recipie.instance()
+				instance.resultId = recipie
+				instance.resultCount = 1
+				instance.recipie = GlobalData.craftingRecipies[recipie]
+				$CraftingRecipies.add_child(instance)
+		
+	var children = $CraftingRecipies.get_children()
+	for recipieId in range(0, len(craftingRecipies)):
+		children[recipieId].goalX = 288 * recipieId
+		children[recipieId].goalX -= 288 * currentCraftingRecipieShown
+		if(recipieId == currentCraftingRecipieShown and crafting):
+			children[recipieId].goalY = 0
+		else:
+			children[recipieId].goalY = 64

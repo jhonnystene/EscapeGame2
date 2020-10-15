@@ -12,8 +12,8 @@ func _ready():
 	goalY = rect_position.y
 
 func _process(delta):
-	rect_position.x = (goalX - rect_position.x) / 2
-	rect_position.y = (goalY - rect_position.y) / 2
+	rect_position.x += (goalX - rect_position.x) / 2
+	rect_position.y += (goalY - rect_position.y) / 2
 	
 	if(len(recipie) == 1):
 		$Needed2.visible = false

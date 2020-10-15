@@ -1,0 +1,5 @@
+=== CRAFTING SYSTEM === 
+	- User can bring up crafting menu with the "C" button
+	- Scroll left + right with same keys as you use to scroll up/down in inventory
+	- Along the bottom side, with similar animations to the inventory
+		- But maybe a card system? (unselected ones stack on top of each other)

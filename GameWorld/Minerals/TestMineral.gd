@@ -6,5 +6,5 @@ var id = "test_rock"
 func mine(delta):
 	miningTime -= delta
 	if(miningTime < 0):
-		GlobalData.add_inventory_item(id)
+		GlobalData.inventory_add_item(id)
 		queue_free()
