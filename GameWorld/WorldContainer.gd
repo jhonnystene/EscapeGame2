@@ -3,7 +3,7 @@ extends Node2D
 var chunk = preload("res://GameWorld/Chunk.tscn")
 var noise = OpenSimplexNoise.new()
 
-func reloadChunks():
+func reload_chunks():
 	var playerChunk = $Player.get_global_transform()[2][0]
 	playerChunk = int(playerChunk / GlobalData.chunkSize)
 	
@@ -32,4 +32,4 @@ func _ready():
 	noise.period = 20
 
 func _process(delta):
-	reloadChunks()
+	reload_chunks()

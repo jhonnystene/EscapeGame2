@@ -15,3 +15,18 @@ script = ExtResource( 2 )
 position = Vector2( 13.4931, -55.471 )
 
 [node name="Chunks" type="Node2D" parent="."]
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -24
+
+[node name="Control" type="Control" parent="BackgroundLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Space Background" type="ColorRect" parent="BackgroundLayer/Control"]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )

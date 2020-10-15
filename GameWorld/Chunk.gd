@@ -1,7 +1,13 @@
 extends Node2D
 
 var surfaceTool = SurfaceTool.new()
-	
+
+func add_mineral(x, y, mineral):
+	mineral = mineral.instance()
+	mineral.global_translate(Vector2(x, y + rand_range(-1, 0)))
+	mineral.global_rotation_degrees = rand_range(-45, 45)
+	add_child(mineral)
+
 func generate(chunkX, noise):
 	name = str(chunkX)
 	surfaceTool.begin(Mesh.PRIMITIVE_LINES)
@@ -11,6 +17,9 @@ func generate(chunkX, noise):
 	
 	var segments = []
 	var points = []
+	
+	if(int(rand_range(0, 10)) == 5):
+		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.testMineral)
 	
 	for x in range(0, GlobalData.chunkSize):
 		# First we create a triangle to define the actual terrain
