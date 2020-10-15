@@ -24,13 +24,19 @@ func _process(delta):
 		$MiningRayCast.visible = false
 
 func _physics_process(delta):
-	var moveX = -int(Input.is_action_pressed("move_left"))
-	moveX += int(Input.is_action_pressed("move_right"))
+	var moveX
+	if($UILayer/UI.crafting):
+		moveX = 0
+	else:
+		moveX = -int(Input.is_action_pressed("move_left"))
+		moveX += int(Input.is_action_pressed("move_right"))
+		
 	moveX *= MOVE_SPEED
 	
 	if(is_on_floor()):
-		if(Input.is_action_pressed("jump")):
-			verticalVelocity = -JUMP_SPEED
+		if not($UILayer/UI.crafting):
+			if(Input.is_action_pressed("jump")):
+				verticalVelocity = -JUMP_SPEED
 	else:
 		verticalVelocity += GRAVITY
 	

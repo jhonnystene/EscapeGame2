@@ -17,6 +17,10 @@ func _process(delta):
 		else:
 			crafting = true
 	
+	if(len(craftingRecipies) == 0):
+		currentCraftingRecipieShown = 0
+		crafting = false
+	
 	if(crafting):
 		if(Input.is_action_just_pressed("scroll_up")):
 			currentCraftingRecipieShown -= 1
@@ -24,6 +28,11 @@ func _process(delta):
 				currentCraftingRecipieShown = 0
 		if(Input.is_action_just_pressed("scroll_down")):
 			currentCraftingRecipieShown += 1
+			if(currentCraftingRecipieShown > len(craftingRecipies) - 1):
+				currentCraftingRecipieShown = len(craftingRecipies) - 1
+				
+		if(Input.is_action_just_pressed("jump")):
+			GlobalData.crafting_craft(craftingRecipies[currentCraftingRecipieShown])
 			if(currentCraftingRecipieShown > len(craftingRecipies) - 1):
 				currentCraftingRecipieShown = len(craftingRecipies) - 1
 			
@@ -59,6 +68,11 @@ func _process(delta):
 				childList[child_id].goalX = 64
 				
 			vis_id += 1
+	
+	for child in $CraftingRecipies.get_children():
+		#print(child.resultId)
+		if not(child.resultId in craftingRecipies):
+			child.queue_free()
 	
 	for recipie in craftingRecipies:
 			var exists = false

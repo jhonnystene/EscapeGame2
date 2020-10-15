@@ -36,6 +36,13 @@ func inventory_get_item_count(id):
 			count = item.count
 			return count
 	return count
+	
+func inventory_remove_item(id, count):
+	for item in inventory:
+		if(item.id == id):
+			item.count -= count
+			if(item.count < 0):
+				item.count = 0
 
 func crafting_can_craft(id):
 	var recipie = craftingRecipies[id]
@@ -43,6 +50,12 @@ func crafting_can_craft(id):
 		if(inventory_get_item_count(neededItem) < recipie[neededItem]):
 			return false
 	return true
+
+func crafting_craft(id):
+	if(crafting_can_craft(id)):
+		inventory_add_item(id)
+		for prereq in craftingRecipies[id]:
+			inventory_remove_item(prereq, craftingRecipies[id][prereq])
 
 func crafting_get_available_recipies():
 	var availableRecipies = []
