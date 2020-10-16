@@ -26,7 +26,27 @@ func _process(delta):
 			$MiningRayCast/MeshInstance2D.rotation_degrees += 5
 		else:
 			$MiningRayCast.visible = false
-
+	else:
+		$MiningRayCast.visible = false
+	
+	if(GlobalData.inventory_get_selected_item() == "test_item"):
+		if($PlacementHelper.get_child_count() == 0):
+			var instance = GlobalData.foundation.instance()
+			$PlacementHelper.add_child(instance)
+		
+		var child = $PlacementHelper.get_children()[0]
+		child.global_transform[2] = get_global_mouse_position()
+		
+		if(Input.is_action_just_pressed("attack")):
+			child.queue_free()
+			var instance = GlobalData.foundation.instance()
+			instance.global_transform[2] = get_global_mouse_position()
+			get_parent().add_child(instance)
+			GlobalData.inventory_remove_item("test_item", 1)
+	else:
+		for child in $PlacementHelper.get_children():
+			child.queue_free()
+		
 func _physics_process(delta):
 	var moveX
 	if($UILayer/UI.crafting):

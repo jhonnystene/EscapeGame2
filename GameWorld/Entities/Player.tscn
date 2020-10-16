@@ -56,3 +56,5 @@ default_color = Color( 0.4, 0.501961, 1, 1 )
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="UILayer" instance=ExtResource( 2 )]
+
+[node name="PlacementHelper" type="Node2D" parent="."]

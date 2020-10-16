@@ -10,6 +10,8 @@ var chunkCount = 100
 var terrainMultiplier = 2
 var testMineral = preload("res://GameWorld/Minerals/TestMineral.tscn")
 
+var foundation = preload("res://GameWorld/Placeable/Floor.tscn")
+
 var itemIds = {}
 var craftingRecipies = {}
 var crafting_recipie = preload("res://UI/CraftingRecipie.tscn")
@@ -21,8 +23,15 @@ var inventory_item_selected = 0
 
 func inventory_get_selected_item():
 	if(len(inventory)):
-		return inventory[inventory_item_selected].id
-	return ""
+		var trueInventoryPosition = 0
+		for itemId in range(0, len(inventory)):
+			if(trueInventoryPosition > len(inventory) - 1):
+				return "mining_beam"
+			if(inventory[itemId].count):
+				if(trueInventoryPosition == inventory_item_selected):
+					return inventory[itemId].id
+				trueInventoryPosition += 1
+	return "mining_beam"
 
 func inventory_add_item(itemId):
 	for item in inventory:
