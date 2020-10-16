@@ -62,11 +62,14 @@ margin_left = 32.0
 margin_top = 486.0
 margin_right = 430.0
 margin_bottom = 568.0
-text = "Pre-Alpha Version
+text = "Alpha Version 0.1a
 Copyright (c) 2020 Johnny Stene.
 Some Rights Reserved.
 This software is released under the terms of the GNU GPL 3.0.
 See LICENSE.TXT for more information."
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]

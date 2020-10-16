@@ -17,6 +17,9 @@ _global_script_class_icons={
 
 config/name="Escape The Robots And Oh Gosh They're Coming Run 2: The Better One"
 run/main_scene="res://TitleScreen/MainMenu.tscn"
+boot_splash/image="res://Sprites/spr_johnnystene_logo.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.129412, 0.14902, 0.247059, 1 )
 
 [autoload]
 
