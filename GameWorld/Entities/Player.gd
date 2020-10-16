@@ -32,6 +32,8 @@ func _process(delta):
 	if(GlobalData.inventory_get_selected_item() == "test_item"):
 		if($PlacementHelper.get_child_count() == 0):
 			var instance = GlobalData.foundation.instance()
+			instance.get_children()[0].queue_free()
+			
 			$PlacementHelper.add_child(instance)
 		
 		var child = $PlacementHelper.get_children()[0]
