@@ -5,23 +5,27 @@ var GRAVITY = 5
 var JUMP_SPEED = 100
 var verticalVelocity = 0
 
+func _ready():
+	GlobalData.inventory_add_item("mining_beam")
+
 func _process(delta):
-	if(Input.is_action_pressed("attack")):
-		$MiningRayCast.visible = true
-		$MiningRayCast.cast_to = get_global_mouse_position()
-		
-		$MiningRayCast.force_raycast_update()
-		if($MiningRayCast.is_colliding() and "Rock" in $MiningRayCast.get_collider().name):
-			$MiningRayCast.get_collider().get_parent().mine(delta)
-			$MiningRayCast/Line2D.points = [Vector2(0, 0), $MiningRayCast.get_collider().get_global_transform()[2] - global_transform[2]]
-			$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.get_collider().get_global_transform()[2]
-		else:
-			$MiningRayCast/Line2D.points = [Vector2(0, 0), get_global_mouse_position() - global_transform[2]]
-			$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.cast_to
+	if(GlobalData.inventory_get_selected_item() == "mining_beam"):
+		if(Input.is_action_pressed("attack")):
+			$MiningRayCast.visible = true
+			$MiningRayCast.cast_to = get_global_mouse_position()
 			
-		$MiningRayCast/MeshInstance2D.rotation_degrees += 5
-	else:
-		$MiningRayCast.visible = false
+			$MiningRayCast.force_raycast_update()
+			if($MiningRayCast.is_colliding() and "Rock" in $MiningRayCast.get_collider().name):
+				$MiningRayCast.get_collider().get_parent().mine(delta)
+				$MiningRayCast/Line2D.points = [Vector2(0, 0), $MiningRayCast.get_collider().get_global_transform()[2] - global_transform[2]]
+				$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.get_collider().get_global_transform()[2]
+			else:
+				$MiningRayCast/Line2D.points = [Vector2(0, 0), get_global_mouse_position() - global_transform[2]]
+				$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.cast_to
+				
+			$MiningRayCast/MeshInstance2D.rotation_degrees += 5
+		else:
+			$MiningRayCast.visible = false
 
 func _physics_process(delta):
 	var moveX

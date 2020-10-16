@@ -19,6 +19,11 @@ var inventory_queue = []
 var inventory_item = preload("res://UI/InventoryItem.tscn")
 var inventory_item_selected = 0
 
+func inventory_get_selected_item():
+	if(len(inventory)):
+		return inventory[inventory_item_selected].id
+	return ""
+
 func inventory_add_item(itemId):
 	for item in inventory:
 		if(item.id == itemId):
@@ -69,6 +74,7 @@ func _ready():
 	print("Initializing items...")
 	itemIds["test_rock"] = load("res://Sprites/Items/TestRock.png")
 	itemIds["test_item"] = load("res://Sprites/Items/TestItem.png")
+	itemIds["mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
 
 	print("Initializing crafting...")
 	craftingRecipies["test_item"] = {"test_rock": 2}

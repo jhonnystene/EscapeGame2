@@ -2,6 +2,7 @@ extends Control
 
 var crafting = false
 var currentCraftingRecipieShown = 0
+var craftingRecipies = []
 
 func inventory_handle_queue():
 	for item in GlobalData.inventory_queue:
@@ -10,7 +11,7 @@ func inventory_handle_queue():
 		GlobalData.inventory_queue.erase(item)
 
 func _process(delta):
-	var craftingRecipies = GlobalData.crafting_get_available_recipies()
+	craftingRecipies = GlobalData.crafting_get_available_recipies()
 	if(Input.is_action_just_pressed("toggle_crafting")):
 		if(crafting):
 			crafting = false
