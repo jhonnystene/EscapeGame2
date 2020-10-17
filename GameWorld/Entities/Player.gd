@@ -15,7 +15,7 @@ func _process(delta):
 			$MiningRayCast.cast_to = get_global_mouse_position()
 			
 			$MiningRayCast.force_raycast_update()
-			if($MiningRayCast.is_colliding() and "Rock" in $MiningRayCast.get_collider().name):
+			if($MiningRayCast.is_colliding() and GlobalData.object_has_property($MiningRayCast.get_collider(), "mineral")):
 				$MiningRayCast.get_collider().get_parent().mine(delta)
 				$MiningRayCast/Line2D.points = [Vector2(0, 0), $MiningRayCast.get_collider().get_global_transform()[2] - global_transform[2]]
 				$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.get_collider().get_global_transform()[2]

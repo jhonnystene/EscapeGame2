@@ -78,6 +78,24 @@ func crafting_get_available_recipies():
 		if(crafting_can_craft(recipie)):
 			availableRecipies.append(recipie)
 	return availableRecipies
+	
+func object_get_properties(object):
+	var properties = []
+	if("Mineral" in object.name or "Rock" in object.name):
+		properties.append("mineral")
+	
+	if("Container" in object.name): 
+		properties.append("object_container")
+	
+	if("Building" in object.name):
+		properties.append("building_material")
+		
+	return properties
+
+func object_has_property(object, property):
+	if(property in object_get_properties(object)):
+		return true
+	return false
 
 func _ready():
 	randomize()
