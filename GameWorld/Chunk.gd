@@ -3,11 +3,19 @@ extends Node2D
 var surfaceTool = SurfaceTool.new()
 var surfaceToolBelow = SurfaceTool.new()
 
+var minerals = []
+
+func _ready():
+	for child in get_parent().get_parent().get_children():
+		if("WorldObjectContainer" in child.name):
+			for mineral in minerals:
+				child.add_child(mineral)
+
 func add_mineral(x, y, mineral):
 	mineral = mineral.instance()
 	mineral.global_translate(Vector2(x, y + rand_range(-1, 0)))
 	mineral.global_rotation_degrees = rand_range(-45, 45)
-	add_child(mineral)
+	minerals.append(mineral)
 
 func generate(chunkX, noise):
 	name = str(chunkX)

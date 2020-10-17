@@ -43,7 +43,9 @@ func _process(delta):
 			child.queue_free()
 			var instance = GlobalData.foundation.instance()
 			instance.global_transform[2] = get_global_mouse_position()
-			get_parent().add_child(instance)
+			for worldChild in get_parent().get_children():
+				if("WorldObjectContainer" in worldChild.name):
+					worldChild.add_child(instance)
 			GlobalData.inventory_remove_item("test_item", 1)
 	else:
 		for child in $PlacementHelper.get_children():
