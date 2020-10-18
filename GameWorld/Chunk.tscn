@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://GameWorld/Chunk.gd" type="Script" id=1]
+[ext_resource path="res://Materials/Test.tres" type="Material" id=2]
+[ext_resource path="res://Materials/GroundMaterialShader.tres" type="Material" id=3]
+
+[sub_resource type="CubeMesh" id=3]
+material = ExtResource( 2 )
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.1
@@ -14,8 +19,11 @@ script = ExtResource( 1 )
 [node name="Minerals" type="Node2D" parent="."]
 
 [node name="DisplayMesh" type="MeshInstance2D" parent="."]
+material = ExtResource( 3 )
+mesh = SubResource( 3 )
 
 [node name="FillerMesh" type="MeshInstance2D" parent="."]
+material = ExtResource( 3 )
 
 [node name="Collision" type="StaticBody2D" parent="."]
 physics_material_override = SubResource( 1 )
