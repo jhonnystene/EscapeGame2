@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://GameWorld/Entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sprites/light_shadow_light.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/light.png" type="Texture" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 4, 2 )
@@ -58,3 +60,16 @@ default_color = Color( 0.4, 0.501961, 1, 1 )
 [node name="UI" parent="UILayer" instance=ExtResource( 2 )]
 
 [node name="PlacementHelper" type="Node2D" parent="."]
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -0.10511, 0.210221 )
+scale = Vector2( 3.3059, 2.62924 )
+texture = ExtResource( 3 )
+texture_scale = 0.04
+energy = 1.47
+shadow_enabled = true
+
+[node name="Light2D2" type="Light2D" parent="."]
+texture = ExtResource( 4 )
+texture_scale = 0.03
+energy = 1.5

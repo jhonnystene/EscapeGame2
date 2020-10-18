@@ -65,20 +65,6 @@ func generate(chunkX, noise):
 		surfaceToolBelow.add_uv(Vector2(genX + x + 1, 10000))
 		surfaceToolBelow.add_vertex(Vector3(genX + x + 1, 10000, 0))
 
-#		surfaceToolBelow.add_uv(Vector2(0, noise.get_noise_2d(genX + x, 1) * GlobalData.terrainMultiplier))
-#		surfaceToolBelow.add_vertex(Vector3(genX + x, noise.get_noise_2d(genX + x, 1) * GlobalData.terrainMultiplier, 0))
-#		surfaceToolBelow.add_uv(Vector2(1, noise.get_noise_2d(genX + x + 1, 1) * GlobalData.terrainMultiplier))
-#		surfaceToolBelow.add_vertex(Vector3(genX + x + 1, noise.get_noise_2d(genX + x + 1, 1) * GlobalData.terrainMultiplier, 0))
-#		surfaceToolBelow.add_uv(Vector2(0, 10000))
-#		surfaceToolBelow.add_vertex(Vector3(genX + x, 10000, 0))
-#
-#		surfaceToolBelow.add_uv(Vector2(0, noise.get_noise_2d(genX + x, 1) * GlobalData.terrainMultiplier))
-#		surfaceToolBelow.add_vertex(Vector3(genX + x, noise.get_noise_2d(genX + x, 1) * GlobalData.terrainMultiplier, 0))
-#		surfaceToolBelow.add_uv(Vector2(1, noise.get_noise_2d(genX + x + 1, 1) * GlobalData.terrainMultiplier))
-#		surfaceToolBelow.add_vertex(Vector3(genX + x + 1, noise.get_noise_2d(genX + x + 1, 1) * GlobalData.terrainMultiplier, 0))
-#		surfaceToolBelow.add_uv(Vector2(1, 10000))
-#		surfaceToolBelow.add_vertex(Vector3(genX + x + 1, 10000, 0))
-		
 	points.append(Vector2(genX + GlobalData.chunkSize, 10000))
 	points.append(Vector2(genX, 10000))
 	points.append(Vector2(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier))

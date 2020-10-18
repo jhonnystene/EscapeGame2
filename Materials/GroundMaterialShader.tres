@@ -57,4 +57,4 @@ shader = SubResource( 1 )
 shader_param/min_val = 0.4
 shader_param/scale = Vector2( 100, 100 )
 shader_param/seamless = false
-shader_param/tint = Color( 0.466667, 0.32549, 0, 1 )
+shader_param/tint = Color( 0.0980392, 0.0588235, 0, 1 )
