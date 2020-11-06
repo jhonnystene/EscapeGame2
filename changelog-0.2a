@@ -4,3 +4,6 @@
 + Added ETR1 title screen animations
 * Fixed bug where player could fly with building materials
 * Fixed bug where mining beam jumps off into nowhere
++ Added Ilmenite
++ Added Silicon
+- Removed Test Rock
