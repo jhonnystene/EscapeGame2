@@ -1,0 +1,6 @@
+* Mining beam length now capped
++ Added basic ground texture
+* Fixed bug where crystals spawned on the wrong render layer
++ Added ETR1 title screen animations
+* Fixed bug where player could fly with building materials
+* Fixed bug where mining beam jumps off into nowhere
