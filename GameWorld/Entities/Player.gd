@@ -14,7 +14,7 @@ func _process(delta):
 			$MiningRayCast.visible = true
 			var x = clamp(get_global_mouse_position()[0] - global_transform[2][0], -30, 30)
 			var y = clamp(get_global_mouse_position()[1] - global_transform[2][1], -30, 30)
-			$MiningRayCast.cast_to = Vector2(x, y) #global_transform[2] + Vector2(x, y)
+			$MiningRayCast.cast_to = Vector2(x, y)
 			
 			$MiningRayCast.force_raycast_update()
 			if($MiningRayCast.is_colliding() and GlobalData.object_has_property($MiningRayCast.get_collider(), "mineral")):

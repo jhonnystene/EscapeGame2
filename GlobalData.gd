@@ -10,6 +10,7 @@ var collisionType = 0
 var chunkCount = 100
 var terrainMultiplier = 2
 var testMineral = preload("res://GameWorld/Minerals/TestMineral.tscn")
+var mineralIlmenite = preload("res://GameWorld/Minerals/Ilmenite.tscn")
 
 var foundation = preload("res://GameWorld/Placeable/Floor.tscn")
 
@@ -103,6 +104,7 @@ func _ready():
 	itemIds["test_rock"] = load("res://Sprites/Items/TestRock.png")
 	itemIds["test_item"] = load("res://Sprites/Items/TestItem.png")
 	itemIds["mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
+	itemIds["ilmenite"] = load("res://Sprites/Items/Ilmenite.png")
 
 	print("Initializing crafting...")
 	craftingRecipies["test_item"] = {"test_rock": 2}

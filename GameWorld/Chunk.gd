@@ -34,8 +34,11 @@ func generate(chunkX, noise):
 	var segments = []
 	var points = []
 	
-	if(int(rand_range(0, 10)) == 5):
-		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.testMineral)
+	#if(int(rand_range(0, 10)) == 5):
+	#	add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.testMineral)
+	
+	if(int(rand_range(0, 30)) == 5):
+		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralIlmenite)
 	
 	for x in range(0, GlobalData.chunkSize):
 		# First we create a triangle to define the actual terrain
