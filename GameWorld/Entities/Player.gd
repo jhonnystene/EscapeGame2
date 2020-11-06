@@ -12,7 +12,11 @@ func _process(delta):
 	if(GlobalData.inventory_get_selected_item() == "mining_beam"):
 		if(Input.is_action_pressed("attack")):
 			$MiningRayCast.visible = true
-			$MiningRayCast.cast_to = get_global_mouse_position()
+			var x = clamp(get_global_mouse_position()[0] - global_transform[2][0], -15, 15)
+			var y = clamp(get_global_mouse_position()[1] - global_transform[2][1], -15, 15)
+			print(Vector2(x, y))
+			#$MiningRayCast.cast_to = get_global_mouse_position() + (clamp(get_global_mouse_position() - global_transform[0], -120, 120))
+			$MiningRayCast.cast_to = global_transform[2] + Vector2(x, y)
 			
 			$MiningRayCast.force_raycast_update()
 			if($MiningRayCast.is_colliding() and GlobalData.object_has_property($MiningRayCast.get_collider(), "mineral")):
@@ -20,7 +24,7 @@ func _process(delta):
 				$MiningRayCast/Line2D.points = [Vector2(0, 0), $MiningRayCast.get_collider().get_global_transform()[2] - global_transform[2]]
 				$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.get_collider().get_global_transform()[2]
 			else:
-				$MiningRayCast/Line2D.points = [Vector2(0, 0), get_global_mouse_position() - global_transform[2]]
+				$MiningRayCast/Line2D.points = [Vector2(0, 0), (global_transform[2] + Vector2(x, y)) - global_transform[2]]
 				$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.cast_to
 				
 			$MiningRayCast/MeshInstance2D.rotation_degrees += 5

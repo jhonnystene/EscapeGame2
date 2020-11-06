@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=1]
 code = "shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
 uniform vec4 albedo : hint_color;
@@ -32,17 +32,17 @@ void fragment() {
 }
 "
 
-[sub_resource type="OpenSimplexNoise" id=1]
+[sub_resource type="OpenSimplexNoise" id=2]
 octaves = 7
 period = 44.7
 persistence = 0.242
 lacunarity = 2.84
 
-[sub_resource type="NoiseTexture" id=2]
-noise = SubResource( 1 )
+[sub_resource type="NoiseTexture" id=3]
+noise = SubResource( 2 )
 
 [resource]
-shader = SubResource( 3 )
+shader = SubResource( 1 )
 shader_param/albedo = Color( 0.505882, 0.309804, 0, 1 )
 shader_param/specular = 0.5
 shader_param/metallic = 0.0
@@ -52,4 +52,4 @@ shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/uv1_offset = Vector3( 0, 0, 0 )
 shader_param/uv2_scale = Vector3( 1, 1, 1 )
 shader_param/uv2_offset = Vector3( 0, 0, 0 )
-shader_param/texture_albedo = SubResource( 2 )
+shader_param/texture_albedo = SubResource( 3 )
