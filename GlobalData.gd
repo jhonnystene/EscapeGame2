@@ -17,6 +17,7 @@ var mineralPyroxene = preload("res://GameWorld/Minerals/Pyroxene.tscn")
 var foundation = preload("res://GameWorld/Placeable/Floor.tscn")
 
 var itemIds = {}
+var friendlyItemNames = {}
 var craftingRecipies = {}
 var crafting_recipie = preload("res://UI/CraftingRecipie.tscn")
 
@@ -104,13 +105,21 @@ func _ready():
 	randomize()
 	print("Initializing items...")
 	itemIds["test_rock"] = load("res://Sprites/Items/TestRock.png")
+	friendlyItemNames["test_rock"] = "Test Rock"
 	itemIds["test_item"] = load("res://Sprites/Items/TestItem.png")
+	friendlyItemNames["test_item"] = "Test Item"
 	itemIds["mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
+	friendlyItemNames["mining_beam"] = "Mining Beam"
 	itemIds["ilmenite"] = load("res://Sprites/Items/Ilmenite.png")
+	friendlyItemNames["ilmenite"] = "Ilmenite"
 	itemIds["silicon"] = load("res://Sprites/Items/Silicon.png")
+	friendlyItemNames["silicon"] = "Silicon"
 	itemIds["pyroxene"] = load("res://Sprites/Items/Pyroxene.png")
+	friendlyItemNames["pyroxene"] = "Pyroxene"
 	itemIds["basic_etching_pen"] = load("res://Sprites/Items/BasicEtchingPen.png")
+	friendlyItemNames["basic_etching_pen"] = "Basic Etching Pen"
 	itemIds["basic_chip"] = load("res://Sprites/Items/BasicChip.png")
+	friendlyItemNames["basic_chip"] = "Basic Chip"
 
 	print("Initializing crafting...")
 	craftingRecipies["test_item"] = {"test_rock": 2}

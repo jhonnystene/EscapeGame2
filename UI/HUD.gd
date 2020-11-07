@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	print($ItemLabel.modulate.a)
+
 var crafting = false
 var currentCraftingRecipieShown = 0
 var craftingRecipies = []
@@ -24,10 +27,12 @@ func _process(delta):
 	
 	if(crafting):
 		if(Input.is_action_just_pressed("scroll_up")):
+			$ItemLabel.modulate.a = 1
 			currentCraftingRecipieShown -= 1
 			if(currentCraftingRecipieShown < 0):
 				currentCraftingRecipieShown = 0
 		if(Input.is_action_just_pressed("scroll_down")):
+			$ItemLabel.modulate.a = 1
 			currentCraftingRecipieShown += 1
 			if(currentCraftingRecipieShown > len(craftingRecipies) - 1):
 				currentCraftingRecipieShown = len(craftingRecipies) - 1
@@ -39,14 +44,18 @@ func _process(delta):
 			
 	else:
 		if(Input.is_action_just_pressed("scroll_up")):
+			$ItemLabel.modulate.a = 1
 			GlobalData.inventory_item_selected -= 1
 			if(GlobalData.inventory_item_selected < 0):
 				GlobalData.inventory_item_selected = 0
 				
 		if(Input.is_action_just_pressed("scroll_down")):
+			$ItemLabel.modulate.a = 1
 			GlobalData.inventory_item_selected += 1
 			if(GlobalData.inventory_item_selected > len(GlobalData.inventory) - 1):
 				GlobalData.inventory_item_selected = len(GlobalData.inventory) - 1
+				
+	$ItemLabel.modulate.a -= 0.5 * delta
 				
 	inventory_handle_queue()
 	for child in $InventoryItems.get_children():
@@ -65,6 +74,8 @@ func _process(delta):
 			
 			if(vis_id == GlobalData.inventory_item_selected):
 				childList[child_id].goalX = 0
+				if(!crafting):
+					$ItemLabel.text = GlobalData.friendlyItemNames[childList[child_id].id]
 			else:
 				childList[child_id].goalX = 64
 				
@@ -94,5 +105,7 @@ func _process(delta):
 		children[recipieId].goalX -= 288 * currentCraftingRecipieShown
 		if(recipieId == currentCraftingRecipieShown and crafting):
 			children[recipieId].goalY = 0
+			if(crafting):
+				$ItemLabel.text = GlobalData.friendlyItemNames[children[recipieId].resultId]
 		else:
 			children[recipieId].goalY = 64

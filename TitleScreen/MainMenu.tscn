@@ -116,7 +116,7 @@ animations = [ {
 content_margin_left = 5.0
 bg_color = Color( 0, 0, 0, 0 )
 border_width_left = 1
-border_color = Color( 0.0941176, 0, 0.733333, 1 )
+border_color = Color( 0.992157, 0.992157, 0.992157, 1 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -130,7 +130,7 @@ __meta__ = {
 position = Vector2( 512, 300 )
 scale = Vector2( 0.533, 0.556 )
 frames = SubResource( 1 )
-frame = 50
+frame = 13
 playing = true
 
 [node name="Title" type="Label" parent="."]
