@@ -42,12 +42,13 @@ func _process(delta):
 		child.global_transform[2] = get_global_mouse_position()
 		
 		if(Input.is_action_just_pressed("attack")):
-			child.queue_free()
+			child.finishPlace()
 			var instance = GlobalData.foundation.instance()
-			instance.global_transform[2] = get_global_mouse_position()
+			instance.global_transform[2] = child.global_transform[2]
 			for worldChild in get_parent().get_children():
 				if("WorldObjectContainer" in worldChild.name):
 					worldChild.add_child(instance)
+			child.queue_free()
 			GlobalData.inventory_remove_item("floor_tile", 1)
 	else:
 		for child in $PlacementHelper.get_children():
