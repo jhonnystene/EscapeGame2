@@ -12,7 +12,7 @@ func _on_RunButton_pressed():
 	args.remove(0)
 	
 	if(command == "help"):
-		echo("help give save load")
+		echo("help give save load legal")
 	elif(command == "give"):
 		if(len(args) == 1):
 			args.append("1")
@@ -22,6 +22,14 @@ func _on_RunButton_pressed():
 		GlobalData.serialisation_save()
 	elif(command == "load"):
 		GlobalData.serialisation_load()
+	elif(command == "legal"):
+		if($LicenseDisplay.visible):
+			$LicenseDisplay.visible = false
+		else:
+			$LicenseDisplay.visible = true
+	
+	else:
+		echo("Unknown command")
 	
 	$ConsoleInput.text = ""
 
