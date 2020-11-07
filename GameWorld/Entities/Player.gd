@@ -9,7 +9,7 @@ func _ready():
 	GlobalData.inventory_add_item("mining_beam")
 
 func _process(delta):
-	if(GlobalData.inventory_get_selected_item() == "mining_beam"):
+	if(GlobalData.inventory_is_mining_tool(GlobalData.inventory_get_selected_item())):
 		if(Input.is_action_pressed("attack")):
 			$MiningRayCast.visible = true
 			var x = clamp(get_global_mouse_position()[0] - global_transform[2][0], -30, 30)
@@ -18,7 +18,7 @@ func _process(delta):
 			
 			$MiningRayCast.force_raycast_update()
 			if($MiningRayCast.is_colliding() and GlobalData.object_has_property($MiningRayCast.get_collider(), "mineral")):
-				$MiningRayCast.get_collider().get_parent().mine(delta)
+				$MiningRayCast.get_collider().get_parent().mine(GlobalData.inventory_get_miner_speed(GlobalData.inventory_get_selected_item(), delta))
 				$MiningRayCast/Line2D.points = [Vector2(0, 0), $MiningRayCast.get_collider().get_global_transform()[2] - global_transform[2]]
 				$MiningRayCast/MeshInstance2D.global_transform[2] = $MiningRayCast.get_collider().get_global_transform()[2]
 			else:

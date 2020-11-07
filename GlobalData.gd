@@ -26,6 +26,17 @@ var inventory_queue = []
 var inventory_item = preload("res://UI/InventoryItem.tscn")
 var inventory_item_selected = 0
 
+func inventory_is_mining_tool(id):
+	if("mining_beam" in id):
+		return true
+	return false
+	
+func inventory_get_miner_speed(id, delta):
+	if(id == "advanced_mining_beam"):
+		return delta * 2
+	
+	return delta
+
 func inventory_get_selected_item():
 	if(len(inventory)):
 		var trueInventoryPosition = 0
@@ -73,6 +84,8 @@ func crafting_can_craft(id):
 func crafting_craft(id):
 	if(crafting_can_craft(id)):
 		inventory_add_item(id)
+		if(inventory_is_mining_tool(id)):
+			inventory.push_front(inventory.pop_back())
 		for prereq in craftingRecipies[id]:
 			inventory_remove_item(prereq, craftingRecipies[id][prereq])
 
@@ -110,6 +123,8 @@ func _ready():
 	friendlyItemNames["test_item"] = "Test Item"
 	itemIds["mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
 	friendlyItemNames["mining_beam"] = "Mining Beam"
+	itemIds["advanced_mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
+	friendlyItemNames["advanced_mining_beam"] = "Advanced Mining Beam"
 	itemIds["ilmenite"] = load("res://Sprites/Items/Ilmenite.png")
 	friendlyItemNames["ilmenite"] = "Ilmenite"
 	itemIds["silicon"] = load("res://Sprites/Items/Silicon.png")
@@ -126,6 +141,7 @@ func _ready():
 	craftingRecipies["test_rock"] = {"test_rock": 4}
 	craftingRecipies["basic_etching_pen"] = {"ilmenite": 2, "pyroxene": 1}
 	craftingRecipies["basic_chip"] = {"basic_etching_pen": 1, "silicon": 1}
+	craftingRecipies["advanced_mining_beam"] = {"basic_chip": 1, "mining_beam": 1}
 
 func create_world_seed(newSeed):
 	if not(newSeed):
