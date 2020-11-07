@@ -19,7 +19,7 @@ func _process(delta):
 		$Needed2.visible = false
 	else:
 		$Needed2.visible = true
-		$Needed2.texture = GlobalData.itemIds[recipie[recipie.keys()[1]]]
+		$Needed2.texture = GlobalData.itemIds[recipie.keys()[1]]
 		$Needed2/Count.text = str(recipie[recipie.keys()[1]])
 	
 	

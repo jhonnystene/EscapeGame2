@@ -43,6 +43,9 @@ func generate(chunkX, noise):
 	elif(int(rand_range(0, 120)) == 5):
 		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralSilicon)
 	
+	elif(int(rand_range(0, 180)) == 5):
+		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralPyroxene)
+	
 	for x in range(0, GlobalData.chunkSize):
 		# First we create a triangle to define the actual terrain
 		surfaceTool.add_uv(Vector2(genX + x, noise.get_noise_2d(genX + x, 1) * GlobalData.terrainMultiplier))

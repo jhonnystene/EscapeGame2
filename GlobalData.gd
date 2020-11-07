@@ -12,6 +12,7 @@ var terrainMultiplier = 2
 var testMineral = preload("res://GameWorld/Minerals/TestMineral.tscn")
 var mineralIlmenite = preload("res://GameWorld/Minerals/Ilmenite.tscn")
 var mineralSilicon = preload("res://GameWorld/Minerals/Silicon.tscn")
+var mineralPyroxene = preload("res://GameWorld/Minerals/Pyroxene.tscn")
 
 var foundation = preload("res://GameWorld/Placeable/Floor.tscn")
 
@@ -107,10 +108,13 @@ func _ready():
 	itemIds["mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
 	itemIds["ilmenite"] = load("res://Sprites/Items/Ilmenite.png")
 	itemIds["silicon"] = load("res://Sprites/Items/Silicon.png")
+	itemIds["pyroxene"] = load("res://Sprites/Items/Pyroxene.png")
+	itemIds["basic_etching_pen"] = load("res://Sprites/Items/BasicEtchingPen.png")
 
 	print("Initializing crafting...")
 	craftingRecipies["test_item"] = {"test_rock": 2}
 	craftingRecipies["test_rock"] = {"test_rock": 4}
+	craftingRecipies["basic_etching_pen"] = {"ilmenite": 2, "pyroxene": 1}
 
 func create_world_seed(newSeed):
 	if not(newSeed):
