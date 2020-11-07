@@ -14,3 +14,6 @@
 	- Craft with 1 Basic Etching Pen and 1 Silicon
 + Added Advanced Mining Beam
 	- Craft with 1 Mining Beam and 1 Basic Chip
++ Added light on the end of the mining beam
+* Fixed bug where player had a seizure while trying to stand still
+

@@ -50,6 +50,12 @@ collide_with_bodies = false
 [node name="MeshInstance2D" type="MeshInstance2D" parent="MiningRayCast"]
 mesh = SubResource( 4 )
 
+[node name="Light2D" type="Light2D" parent="MiningRayCast/MeshInstance2D"]
+texture = ExtResource( 4 )
+texture_scale = 0.01
+color = Color( 0.94902, 0.164706, 0.0352941, 1 )
+energy = 1.37
+
 [node name="Line2D" type="Line2D" parent="MiningRayCast"]
 width = 0.2
 width_curve = SubResource( 5 )

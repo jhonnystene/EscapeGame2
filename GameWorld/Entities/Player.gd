@@ -73,7 +73,11 @@ func _physics_process(delta):
 	# This works around a quirk in the Godot physics engine that makes it
 	# damn near impossible to go up the slopes in the game.
 	$RayCast2D.force_raycast_update()
-	if($RayCast2D.is_colliding() and moveX > 0):
+	if($RayCast2D.is_colliding() and moveX):
 		verticalVelocity = -5
 	
-	move_and_slide(Vector2(moveX, verticalVelocity), Vector2(0, -1))
+	if(moveX):
+		move_and_slide(Vector2(moveX, verticalVelocity), Vector2(0, -1))
+	else:
+		if(verticalVelocity < 1 or !$RayCast2D.is_colliding()):
+			move_and_slide(Vector2(0, verticalVelocity), Vector2(0, -1))
