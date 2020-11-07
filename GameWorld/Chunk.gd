@@ -89,7 +89,6 @@ func generate(chunkX, noise):
 	$DisplayMesh.set_mesh(generatedMesh)
 	#$DisplayMesh.material = load("res://Materials/GroundShaderMaterial.tres")
 	
-	
 	var collisionShape
 	if(GlobalData.collisionType == GlobalData.COLLISION_TYPE_CONVEX):
 		collisionShape = ConvexPolygonShape2D.new()

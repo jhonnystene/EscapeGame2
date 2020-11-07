@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/DebugConsole.gd" type="Script" id=1]
+
+[node name="DebugConsole" type="CanvasLayer"]
+pause_mode = 2
+layer = 128
+
+[node name="Console" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConsoleDisplay" type="TextEdit" parent="Console"]
+margin_right = 1024.0
+margin_bottom = 250.0
+readonly = true
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConsoleInput" type="LineEdit" parent="Console"]
+margin_top = 250.0
+margin_right = 896.0
+margin_bottom = 300.0
+placeholder_text = "Command"
+
+[node name="RunButton" type="Button" parent="Console"]
+margin_left = 896.0
+margin_top = 250.0
+margin_right = 1024.0
+margin_bottom = 300.0
+text = "Run"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Console/RunButton" to="Console" method="_on_RunButton_pressed"]

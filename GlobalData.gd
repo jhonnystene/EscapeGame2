@@ -77,6 +77,7 @@ func serialisation_load():
 	var data = parse_json(file.get_line())
 	file.close()
 	serialisation_deserialise(data)
+	get_tree().change_scene("res://GameWorld/WorldContainer.tscn")
 
 func serialisation_serialise():
 	var data = {}

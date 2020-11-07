@@ -1,10 +1,11 @@
 extends Control
 
 func _on_NewGameButton_pressed():
+	GlobalData.inventory_add_item("mining_beam")
 	get_tree().change_scene("res://TitleScreen/NewGameMenu.tscn")
 
 func _on_LoadGameButton_pressed():
-	pass # Replace with function body.
+	GlobalData.serialisation_load()
 
 func _on_OptionsButton_pressed():
 	pass # Replace with function body.

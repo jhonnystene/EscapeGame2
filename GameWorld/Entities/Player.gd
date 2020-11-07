@@ -5,9 +5,6 @@ var GRAVITY = 5
 var JUMP_SPEED = 100
 var verticalVelocity = 0
 
-func _ready():
-	GlobalData.inventory_add_item("mining_beam")
-
 func _process(delta):
 	if(GlobalData.inventory_is_mining_tool(GlobalData.inventory_get_selected_item())):
 		if(Input.is_action_pressed("attack")):
