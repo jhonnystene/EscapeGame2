@@ -16,4 +16,7 @@
 	- Craft with 1 Mining Beam and 1 Basic Chip
 + Added light on the end of the mining beam
 * Fixed bug where player had a seizure while trying to stand still
-
++ Added Aluminium
++ Added Floor Tile
+- Removed Test Floor
++ Improved physics

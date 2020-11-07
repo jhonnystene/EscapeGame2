@@ -37,7 +37,10 @@ func generate(chunkX, noise):
 	#if(int(rand_range(0, 10)) == 5):
 	#	add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.testMineral)
 	
-	if(int(rand_range(0, 50)) == 5):
+	if(int(rand_range(0, 25)) == 5):
+		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralAluminium)
+	
+	elif(int(rand_range(0, 50)) == 5):
 		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralIlmenite)
 	
 	elif(int(rand_range(0, 120)) == 5):
@@ -97,4 +100,4 @@ func generate(chunkX, noise):
 		collisionShape = ConcavePolygonShape2D.new()
 		collisionShape.set_segments(segments)
 	
-	$Collision/CollisionShape.shape = collisionShape
+	$GroundCollision/CollisionShape.shape = collisionShape

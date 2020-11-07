@@ -31,7 +31,7 @@ func _process(delta):
 	else:
 		$MiningRayCast.visible = false
 	
-	if(GlobalData.inventory_get_selected_item() == "test_item"):
+	if(GlobalData.inventory_get_selected_item() == "floor_tile"):
 		if($PlacementHelper.get_child_count() == 0):
 			var instance = GlobalData.foundation.instance()
 			instance.get_children()[0].queue_free()
@@ -48,7 +48,7 @@ func _process(delta):
 			for worldChild in get_parent().get_children():
 				if("WorldObjectContainer" in worldChild.name):
 					worldChild.add_child(instance)
-			GlobalData.inventory_remove_item("test_item", 1)
+			GlobalData.inventory_remove_item("floor_tile", 1)
 	else:
 		for child in $PlacementHelper.get_children():
 			child.queue_free()
@@ -74,7 +74,8 @@ func _physics_process(delta):
 	# damn near impossible to go up the slopes in the game.
 	$RayCast2D.force_raycast_update()
 	if($RayCast2D.is_colliding() and moveX):
-		verticalVelocity = -5
+		if("GroundCollision" in $RayCast2D.get_collider().name):
+			verticalVelocity = -5
 	
 	if(moveX):
 		move_and_slide(Vector2(moveX, verticalVelocity), Vector2(0, -1))

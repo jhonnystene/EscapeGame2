@@ -13,6 +13,7 @@ var testMineral = preload("res://GameWorld/Minerals/TestMineral.tscn")
 var mineralIlmenite = preload("res://GameWorld/Minerals/Ilmenite.tscn")
 var mineralSilicon = preload("res://GameWorld/Minerals/Silicon.tscn")
 var mineralPyroxene = preload("res://GameWorld/Minerals/Pyroxene.tscn")
+var mineralAluminium = preload("res://GameWorld/Minerals/Aluminium.tscn")
 
 var foundation = preload("res://GameWorld/Placeable/Floor.tscn")
 
@@ -25,6 +26,68 @@ var inventory = []
 var inventory_queue = []
 var inventory_item = preload("res://UI/InventoryItem.tscn")
 var inventory_item_selected = 0
+
+func serialisation_inventory_serialise():
+	var data = {}
+	for item in inventory:
+		data[item.id] = item.count
+	return data
+
+func serialisation_inventory_deserialise(data):
+	for item in inventory:
+		item.queue_free()
+	
+	for itemId in data:
+		for i in range(0, data[itemId]):
+			inventory_add_item(itemId)
+
+func serialisation_world_serialise():
+	# We need these:
+	# Player position (or at least player spawn position, if we decide to not do permadeath)
+	# Building positions
+	
+	var data = {}
+	data["worldSeed"] = worldSeed
+	data["chunkSize"] = chunkSize
+	data["collisionType"] = collisionType
+	data["chunkCount"] = chunkCount
+	data["terrainMultiplier"] = terrainMultiplier
+	return data
+
+func serialisation_world_deserialise(data):
+	worldSeed = data["worldSeed"]
+	chunkSize = data["chunkSize"]
+	collisionType = data["collisionType"]
+	chunkCount = data["chunkCount"]
+	terrainMultiplier = data["terrainMultiplier"]
+	
+func serialisation_save():
+	var data = serialisation_serialise()
+	var file = File.new()
+	file.open("user://save.json", File.WRITE)
+	file.store_line(to_json(data))
+	file.close()
+
+func serialisation_load():
+	var file = File.new()
+	if not(file.file_exists("user://save.json")):
+		print("Error! save.json not found")
+		return
+	file.open("user://save.json", File.READ)
+	var data = parse_json(file.get_line())
+	file.close()
+	serialisation_deserialise(data)
+
+func serialisation_serialise():
+	var data = {}
+	data["inventory"] = serialisation_inventory_serialise()
+	data["world"] = serialisation_world_serialise()
+	return data
+
+func serialisation_deserialise(data):
+	serialisation_inventory_deserialise(data["inventory"])
+	serialisation_world_deserialise(data["world"])
+	return
 
 func inventory_is_mining_tool(id):
 	if("mining_beam" in id):
@@ -135,6 +198,10 @@ func _ready():
 	friendlyItemNames["basic_etching_pen"] = "Basic Etching Pen"
 	itemIds["basic_chip"] = load("res://Sprites/Items/BasicChip.png")
 	friendlyItemNames["basic_chip"] = "Basic Chip"
+	itemIds["floor_tile"] = load("res://Sprites/Items/Floor.png")
+	friendlyItemNames["floor_tile"] = "Floor Tile"
+	itemIds["aluminium"] = load("res://Sprites/Items/Aluminium.png")
+	friendlyItemNames["aluminium"] = "Aluminium Chunk"
 
 	print("Initializing crafting...")
 	craftingRecipies["test_item"] = {"test_rock": 2}
@@ -142,6 +209,7 @@ func _ready():
 	craftingRecipies["basic_etching_pen"] = {"ilmenite": 2, "pyroxene": 1}
 	craftingRecipies["basic_chip"] = {"basic_etching_pen": 1, "silicon": 1}
 	craftingRecipies["advanced_mining_beam"] = {"basic_chip": 1, "mining_beam": 1}
+	craftingRecipies["floor_tile"] = {"aluminium": 2}
 
 func create_world_seed(newSeed):
 	if not(newSeed):
