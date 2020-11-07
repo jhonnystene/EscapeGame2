@@ -110,11 +110,13 @@ func _ready():
 	itemIds["silicon"] = load("res://Sprites/Items/Silicon.png")
 	itemIds["pyroxene"] = load("res://Sprites/Items/Pyroxene.png")
 	itemIds["basic_etching_pen"] = load("res://Sprites/Items/BasicEtchingPen.png")
+	itemIds["basic_chip"] = load("res://Sprites/Items/BasicChip.png")
 
 	print("Initializing crafting...")
 	craftingRecipies["test_item"] = {"test_rock": 2}
 	craftingRecipies["test_rock"] = {"test_rock": 4}
 	craftingRecipies["basic_etching_pen"] = {"ilmenite": 2, "pyroxene": 1}
+	craftingRecipies["basic_chip"] = {"basic_etching_pen": 1, "silicon": 1}
 
 func create_world_seed(newSeed):
 	if not(newSeed):
