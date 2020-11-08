@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GameWorld/Entities/Mineral.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 64 )
+
+[node name="Mineral" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Rock" type="Area2D" parent="."]
+scale = Vector2( 0.031, 0.031 )
+
+[node name="Display" type="Control" parent="Rock"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="R0" type="ColorRect" parent="Rock/Display"]
+margin_left = -44.5348
+margin_top = -35.0885
+margin_right = 45.4652
+margin_bottom = 34.9115
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="R1" type="ColorRect" parent="Rock/Display"]
+margin_left = -59.1123
+margin_top = 1.68412
+margin_right = 30.8877
+margin_bottom = 71.6841
+rect_rotation = -38.3918
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="R2" type="ColorRect" parent="Rock/Display"]
+margin_left = -31.5889
+margin_top = -46.127
+margin_right = 58.4111
+margin_bottom = 23.873
+rect_rotation = 19.6373
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="R3" type="ColorRect" parent="Rock/Display"]
+margin_left = -9.43315
+margin_top = -53.1525
+margin_right = 80.5669
+margin_bottom = 16.8475
+rect_rotation = 45.1664
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rock"]
+shape = SubResource( 1 )

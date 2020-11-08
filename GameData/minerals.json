@@ -1,0 +1,6 @@
+{
+	"ilmenite": {"rarity": 50, "color": "#001a1a", "miningTime": 3},
+	"silicon": {"rarity": 120, "color": "#7733ff", "miningTime": 4},
+	"pyroxene": {"rarity": 180, "color": "#006600", "miningTime": 5},
+	"aluminium": {"rarity": 25, "color": "#e6ffe6", "miningTime": 1},
+}

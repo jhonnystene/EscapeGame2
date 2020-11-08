@@ -12,7 +12,6 @@ func _ready():
 				child.add_child(mineral)
 
 func add_mineral(x, y, mineral):
-	mineral = mineral.instance()
 	mineral.global_translate(Vector2(x, y + rand_range(-1, 0)))
 	mineral.global_rotation_degrees = rand_range(-45, 45)
 	minerals.append(mineral)
@@ -34,20 +33,9 @@ func generate(chunkX, noise):
 	var segments = []
 	var points = []
 	
-	#if(int(rand_range(0, 10)) == 5):
-	#	add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.testMineral)
-	
-	if(int(rand_range(0, 25)) == 5):
-		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralAluminium)
-	
-	elif(int(rand_range(0, 50)) == 5):
-		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralIlmenite)
-	
-	elif(int(rand_range(0, 120)) == 5):
-		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralSilicon)
-	
-	elif(int(rand_range(0, 180)) == 5):
-		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, GlobalData.mineralPyroxene)
+	var mineral = GlobalData.world_get_mineral(chunkX)
+	if(mineral):
+		add_mineral(genX, noise.get_noise_2d(genX, 1) * GlobalData.terrainMultiplier, mineral)
 	
 	for x in range(0, GlobalData.chunkSize):
 		# First we create a triangle to define the actual terrain

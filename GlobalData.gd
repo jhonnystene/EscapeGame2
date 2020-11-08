@@ -9,11 +9,10 @@ var chunkSize = 4
 var collisionType = 0
 var chunkCount = 100
 var terrainMultiplier = 2
-var testMineral = preload("res://GameWorld/Minerals/TestMineral.tscn")
-var mineralIlmenite = preload("res://GameWorld/Minerals/Ilmenite.tscn")
-var mineralSilicon = preload("res://GameWorld/Minerals/Silicon.tscn")
-var mineralPyroxene = preload("res://GameWorld/Minerals/Pyroxene.tscn")
-var mineralAluminium = preload("res://GameWorld/Minerals/Aluminium.tscn")
+
+var minerals = {}
+var mineralObject = preload("res://GameWorld/Entities/Mineral.tscn")
+var generatedChunks = []
 
 var foundation = preload("res://GameWorld/Placeable/Floor.tscn")
 
@@ -199,6 +198,24 @@ func game_initialise():
 	var craftingData = file_load_as_json("res://GameData/crafting.json")
 	for result in craftingData:
 		craftingRecipies[result] = craftingData[result]
+		
+	print("Loading mineral information...")
+	var mineralData = file_load_as_json("res://GameData/minerals.json")
+	for mineral in mineralData:
+		minerals[mineral] = mineralData[mineral]
+
+func world_get_mineral(chunkX):
+	if(chunkX in generatedChunks):
+		return false
+	generatedChunks.append(chunkX)
+	var instance = mineralObject.instance()
+	for mineral in minerals:
+		if(int(rand_range(0, minerals[mineral]["rarity"])) == 1):
+			instance.id = mineral
+			instance.miningTime = minerals[mineral]["miningTime"]
+			instance.color = Color(minerals[mineral]["color"])
+			return instance
+	return false
 
 func _ready():
 	randomize()
