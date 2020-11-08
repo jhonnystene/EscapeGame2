@@ -178,39 +178,30 @@ func object_has_property(object, property):
 		return true
 	return false
 
+func file_load_as_json(path):
+	var file = File.new()
+	var data = ""
+	file.open(path, File.READ)
+	while(file.get_position() < file.get_len()):
+		data += file.get_line()
+	file.close()
+	data = parse_json(data)
+	return data
+
+func game_initialise():
+	print("Loading item information...")
+	var itemData = file_load_as_json("res://GameData/items.json")
+	for item in itemData:
+		itemIds[item] = load(itemData[item]["image"])
+		friendlyItemNames[item] = itemData[item]["friendly"]
+	
+	print("Loading crafting recipies...")
+	var craftingData = file_load_as_json("res://GameData/crafting.json")
+	for result in craftingData:
+		craftingRecipies[result] = craftingData[result]
+
 func _ready():
 	randomize()
-	print("Initializing items...")
-	itemIds["test_rock"] = load("res://Sprites/Items/TestRock.png")
-	friendlyItemNames["test_rock"] = "Test Rock"
-	itemIds["test_item"] = load("res://Sprites/Items/TestItem.png")
-	friendlyItemNames["test_item"] = "Test Item"
-	itemIds["mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
-	friendlyItemNames["mining_beam"] = "Mining Beam"
-	itemIds["advanced_mining_beam"] = load("res://Sprites/Items/LaserPointer.png")
-	friendlyItemNames["advanced_mining_beam"] = "Advanced Mining Beam"
-	itemIds["ilmenite"] = load("res://Sprites/Items/Ilmenite.png")
-	friendlyItemNames["ilmenite"] = "Ilmenite"
-	itemIds["silicon"] = load("res://Sprites/Items/Silicon.png")
-	friendlyItemNames["silicon"] = "Silicon"
-	itemIds["pyroxene"] = load("res://Sprites/Items/Pyroxene.png")
-	friendlyItemNames["pyroxene"] = "Pyroxene"
-	itemIds["basic_etching_pen"] = load("res://Sprites/Items/BasicEtchingPen.png")
-	friendlyItemNames["basic_etching_pen"] = "Basic Etching Pen"
-	itemIds["basic_chip"] = load("res://Sprites/Items/BasicChip.png")
-	friendlyItemNames["basic_chip"] = "Basic Chip"
-	itemIds["floor_tile"] = load("res://Sprites/Items/Floor.png")
-	friendlyItemNames["floor_tile"] = "Floor Tile"
-	itemIds["aluminium"] = load("res://Sprites/Items/Aluminium.png")
-	friendlyItemNames["aluminium"] = "Aluminium Chunk"
-
-	print("Initializing crafting...")
-	craftingRecipies["test_item"] = {"test_rock": 2}
-	craftingRecipies["test_rock"] = {"test_rock": 4}
-	craftingRecipies["basic_etching_pen"] = {"ilmenite": 2, "pyroxene": 1}
-	craftingRecipies["basic_chip"] = {"basic_etching_pen": 1, "silicon": 1}
-	craftingRecipies["advanced_mining_beam"] = {"basic_chip": 1, "mining_beam": 1}
-	craftingRecipies["floor_tile"] = {"aluminium": 2}
 
 func create_world_seed(newSeed):
 	if not(newSeed):

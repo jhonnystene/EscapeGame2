@@ -1,0 +1,4 @@
++ Changed how items are stored internally
++ Changed how crafting recipies are stored internally
++ Most of loading takes place after title screen
+

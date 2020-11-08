@@ -1,3 +1,6 @@
 {
-	
+	"floor_tile": {"aluminium": 2},
+	"basic_etching_pen": {"ilmenite": 2, "pyroxene": 1},
+	"basic_chip": {"basic_etching_pen": 1, "silicon": 1},
+	"advanced_mining_beam": {"basic_chip": 1, "mining_beam": 1}
 }

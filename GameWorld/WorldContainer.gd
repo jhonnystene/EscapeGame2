@@ -30,6 +30,7 @@ func _ready():
 	noise.octaves = 1
 	noise.persistence = 0.8
 	noise.period = 20
+	GlobalData.game_initialise()
 
 func _process(delta):
 	reload_chunks()

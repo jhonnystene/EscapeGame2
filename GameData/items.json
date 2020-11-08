@@ -1,0 +1,11 @@
+{
+	"mining_beam": {"image": "res://Sprites/Items/LaserPointer.png", "friendly": "Mining Beam"},
+	"advanced_mining_beam": {"image": "res://Sprites/Items/LaserPointer.png", "friendly": "Advanced Mining Beam"},
+	"ilmenite": {"image": "res://Sprites/Items/Ilmenite.png", "friendly": "Ilmenite"},
+	"silicon": {"image": "res://Sprites/Items/Silicon.png", "friendly": "Silicon"},
+	"pyroxene": {"image": "res://Sprites/Items/Pyroxene.png", "friendly": "Pyroxene"},
+	"basic_etching_pen": {"image": "res://Sprites/Items/BasicEtchingPen.png", "friendly": "Basic Etching Pen"},
+	"basic_chip": {"image": "res://Sprites/Items/BasicChip.png", "friendly": "Basic Chip"},
+	"aluminium": {"image": "res://Sprites/Items/Aluminium.png", "friendly": "Aluminium"},
+	"floor_tile": {"image": "res://Sprites/Items/Floor.png", "friendly": "Floor Tile"}
+}
