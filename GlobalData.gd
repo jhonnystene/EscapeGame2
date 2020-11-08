@@ -51,6 +51,7 @@ func serialisation_world_serialise():
 	data["collisionType"] = collisionType
 	data["chunkCount"] = chunkCount
 	data["terrainMultiplier"] = terrainMultiplier
+	data["generatedChunks"] = generatedChunks
 	return data
 
 func serialisation_world_deserialise(data):
@@ -59,6 +60,7 @@ func serialisation_world_deserialise(data):
 	collisionType = data["collisionType"]
 	chunkCount = data["chunkCount"]
 	terrainMultiplier = data["terrainMultiplier"]
+	generatedChunks = data["generatedChunks"]
 	
 func serialisation_save():
 	var data = serialisation_serialise()

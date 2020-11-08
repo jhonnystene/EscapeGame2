@@ -1,4 +1,5 @@
 + Changed how items are stored internally
 + Changed how crafting recipies are stored internally
 + Most of loading takes place after title screen
-
++ Changed how minerals are generated internally
++ Minerals no longer re-generate on already generated chunks
