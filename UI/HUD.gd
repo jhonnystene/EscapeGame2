@@ -1,8 +1,5 @@
 extends Control
 
-func _ready():
-	print($ItemLabel.modulate.a)
-
 var crafting = false
 var currentCraftingRecipieShown = 0
 var craftingRecipies = []

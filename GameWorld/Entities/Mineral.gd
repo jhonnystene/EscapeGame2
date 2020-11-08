@@ -16,15 +16,16 @@ func mine(delta):
 
 func serialise():
 	var data = {}
+	data["type"] = "mineral"
 	data["x"] = global_transform[2][0]
 	data["y"] = global_transform[2][1]
 	data["id"] = id
 	data["color"] = color.to_html()
 	data["miningTime"] = miningTime
-	return to_json(data)
+	return data
 
 func fromSerialisedData(data):
-	data = parse_json(data)
+	data = data
 	global_transform[2][0] = data["x"]
 	global_transform[2][1] = data["y"]
 	id = data["id"]

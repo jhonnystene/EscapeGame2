@@ -31,6 +31,8 @@ func _ready():
 	noise.persistence = 0.8
 	noise.period = 20
 	GlobalData.game_initialise()
+	if(GlobalData.loading):
+		GlobalData.serialisation_load()
 
 func _process(delta):
 	reload_chunks()

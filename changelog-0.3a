@@ -3,3 +3,7 @@
 + Most of loading takes place after title screen
 + Changed how minerals are generated internally
 + Minerals no longer re-generate on already generated chunks
++ Mineral positions now saved
++ Generated chunks now saved
++ Debug data actually printed to debug console
+

@@ -10,6 +10,8 @@ var collisionType = 0
 var chunkCount = 100
 var terrainMultiplier = 2
 
+var loading = false
+
 var minerals = {}
 var mineralObject = preload("res://GameWorld/Entities/Mineral.tscn")
 var generatedChunks = []
@@ -27,24 +29,28 @@ var inventory_item = preload("res://UI/InventoryItem.tscn")
 var inventory_item_selected = 0
 
 func serialisation_inventory_serialise():
+	DebugConsole.echo("Serialisation: Serialising inventory...")
 	var data = {}
 	for item in inventory:
 		data[item.id] = item.count
+	DebugConsole.echo("Serialisation: Done serialising inventory.")
 	return data
 
 func serialisation_inventory_deserialise(data):
+	DebugConsole.echo("Serialisation: Deserialising inventory...")
 	for item in inventory:
 		item.queue_free()
 	
 	for itemId in data:
 		for i in range(0, data[itemId]):
 			inventory_add_item(itemId)
+	DebugConsole.echo("Serialisation: Done deserialising inventory.")
 
 func serialisation_world_serialise():
 	# We need these:
 	# Player position (or at least player spawn position, if we decide to not do permadeath)
 	# Building positions
-	
+	DebugConsole.echo("Serialisation: Serialising world data...")
 	var data = {}
 	data["worldSeed"] = worldSeed
 	data["chunkSize"] = chunkSize
@@ -52,43 +58,80 @@ func serialisation_world_serialise():
 	data["chunkCount"] = chunkCount
 	data["terrainMultiplier"] = terrainMultiplier
 	data["generatedChunks"] = generatedChunks
+	DebugConsole.echo("Serialisation: Done serialising world data.")
 	return data
 
 func serialisation_world_deserialise(data):
+	DebugConsole.echo("Serialisation: Deserialising world data...")
 	worldSeed = data["worldSeed"]
 	chunkSize = data["chunkSize"]
 	collisionType = data["collisionType"]
 	chunkCount = data["chunkCount"]
 	terrainMultiplier = data["terrainMultiplier"]
 	generatedChunks = data["generatedChunks"]
+	DebugConsole.echo("Serialisation: Done deserialising world data.")
+	
+func serialisation_objects_serialise():
+	DebugConsole.echo("Serialisation: Serialising objects...")
+	var data = []
+	for child in get_tree().get_root().get_children():
+		if("WorldContainer" in child.name):
+			for subchild in child.get_children():
+				if("WorldObjectContainer" in subchild.name):
+					for object in subchild.get_children():
+						if("Serialisable" in object.name):
+							data.append(object.serialise())
+	DebugConsole.echo("Serialisation: Finished serialising objects.")
+	return data
+
+func serialisation_objects_deserialise(data):
+	DebugConsole.echo("Serialisation: Deserialising objects...")
+	for child in get_tree().get_root().get_children():
+		if("WorldContainer" in child.name):
+			for subchild in child.get_children():
+				if("WorldObjectContainer" in subchild.name):
+					for object in data:
+						if(object["type"] == "mineral"):
+							var instance = mineralObject.instance()
+							instance.fromSerialisedData(object)
+							subchild.add_child(instance)
+						else:
+							DebugConsole.echo("Serialisation: Unknown type: " + object["type"])
+					return
+	DebugConsole.echo("Serialisation: Finished deserialising objects.")
 	
 func serialisation_save():
+	DebugConsole.echo("Serialisation: Saving game...")
 	var data = serialisation_serialise()
 	var file = File.new()
 	file.open("user://save.json", File.WRITE)
 	file.store_line(to_json(data))
 	file.close()
+	DebugConsole.echo("Serialisation: Done saving.")
 
 func serialisation_load():
+	DebugConsole.echo("Serialisation: Loading game...")
 	var file = File.new()
 	if not(file.file_exists("user://save.json")):
-		print("Error! save.json not found")
+		DebugConsole.echo("Serialisation: Error! save.json not found")
 		return
 	file.open("user://save.json", File.READ)
 	var data = parse_json(file.get_line())
 	file.close()
 	serialisation_deserialise(data)
-	get_tree().change_scene("res://GameWorld/WorldContainer.tscn")
+	DebugConsole.echo("Serialisation: Done loading.")
 
 func serialisation_serialise():
 	var data = {}
 	data["inventory"] = serialisation_inventory_serialise()
 	data["world"] = serialisation_world_serialise()
+	data["objects"] = serialisation_objects_serialise()
 	return data
 
 func serialisation_deserialise(data):
 	serialisation_inventory_deserialise(data["inventory"])
 	serialisation_world_deserialise(data["world"])
+	serialisation_objects_deserialise(data["objects"])
 	return
 
 func inventory_is_mining_tool(id):
@@ -190,18 +233,18 @@ func file_load_as_json(path):
 	return data
 
 func game_initialise():
-	print("Loading item information...")
+	DebugConsole.echo("GameData-Load: Loading item information...")
 	var itemData = file_load_as_json("res://GameData/items.json")
 	for item in itemData:
 		itemIds[item] = load(itemData[item]["image"])
 		friendlyItemNames[item] = itemData[item]["friendly"]
 	
-	print("Loading crafting recipies...")
+	DebugConsole.echo("GameData-Load: Loading crafting recipies...")
 	var craftingData = file_load_as_json("res://GameData/crafting.json")
 	for result in craftingData:
 		craftingRecipies[result] = craftingData[result]
 		
-	print("Loading mineral information...")
+	DebugConsole.echo("GameData-Load: Loading mineral information...")
 	var mineralData = file_load_as_json("res://GameData/minerals.json")
 	for mineral in mineralData:
 		minerals[mineral] = mineralData[mineral]
@@ -224,7 +267,7 @@ func _ready():
 
 func create_world_seed(newSeed):
 	if not(newSeed):
-		print("DEBUG: No world seed given!")
+		DebugConsole.echo("DEBUG: No world seed given!")
 		worldSeed = randi()
 	newSeed = str(newSeed).to_utf8()
 	worldSeed = ""
