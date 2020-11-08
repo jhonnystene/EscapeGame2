@@ -20,12 +20,12 @@ func add_mineral(x, y, mineral):
 func generate(chunkX, noise):
 	name = str(chunkX)
 	surfaceTool.begin(Mesh.PRIMITIVE_LINES)
-	surfaceTool.add_color(Color(GlobalData.world_color))
-	#surfaceTool.set_material(load("res://Materials/GroundMaterialShader.tres"))
+	#surfaceTool.add_color(Color(GlobalData.world_color))
+	surfaceTool.set_material(load("res://Materials/GroundMaterial.tres"))
 	
 	surfaceToolBelow.begin(Mesh.PRIMITIVE_TRIANGLES)
-	surfaceToolBelow.add_color(Color(GlobalData.world_color))
-	#surfaceToolBelow.set_material(load("res://Materials/GroundMaterialShader.tres"))
+	#surfaceToolBelow.add_color(Color(GlobalData.world_color))
+	surfaceToolBelow.set_material(load("res://Materials/GroundMaterial.tres"))
 	
 	var genX = chunkX * GlobalData.chunkSize
 	var generatedMesh = Mesh.new()
@@ -88,7 +88,6 @@ func generate(chunkX, noise):
 	surfaceTool.commit(generatedMesh)
 	$DisplayMesh.set_mesh(generatedMesh)
 	#$DisplayMesh.material = load("res://Materials/GroundShaderMaterial.tres")
-	
 	var collisionShape
 	if(GlobalData.collisionType == GlobalData.COLLISION_TYPE_CONVEX):
 		collisionShape = ConvexPolygonShape2D.new()

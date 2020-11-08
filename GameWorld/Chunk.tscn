@@ -1,11 +1,21 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://GameWorld/Chunk.gd" type="Script" id=1]
 [ext_resource path="res://Materials/Test.tres" type="Material" id=2]
-[ext_resource path="res://Materials/GroundMaterialShader.tres" type="Material" id=3]
+[ext_resource path="res://Materials/TextureShader.tres" type="Material" id=3]
+[ext_resource path="res://Sprites/Ground.png" type="Texture" id=4]
+[ext_resource path="res://Materials/GroundShader.shader" type="Shader" id=5]
 
 [sub_resource type="CubeMesh" id=1]
 material = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 5 )
+shader_param/scale = null
+shader_param/texture_albedo = ExtResource( 4 )
+
+[sub_resource type="CubeMesh" id=4]
+material = SubResource( 6 )
 
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.1
@@ -24,6 +34,8 @@ mesh = SubResource( 1 )
 
 [node name="FillerMesh" type="MeshInstance2D" parent="."]
 material = ExtResource( 3 )
+mesh = SubResource( 4 )
+texture = ExtResource( 4 )
 
 [node name="GroundCollision" type="StaticBody2D" parent="."]
 physics_material_override = SubResource( 2 )
