@@ -130,7 +130,7 @@ __meta__ = {
 position = Vector2( 512, 300 )
 scale = Vector2( 0.533, 0.556 )
 frames = SubResource( 1 )
-frame = 54
+frame = 53
 playing = true
 
 [node name="Title" type="Label" parent="."]
@@ -209,7 +209,7 @@ margin_left = 25.0
 margin_top = 493.0
 margin_right = 423.0
 margin_bottom = 575.0
-text = "Alpha Version 0.2a
+text = "Alpha Version 0.3a
 Copyright (c) 2020 Johnny Stene.
 Some Rights Reserved.
 This software is released under the terms of the GNU GPL 3.0.

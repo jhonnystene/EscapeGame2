@@ -62,6 +62,8 @@ func _physics_process(delta):
 	moveX *= MOVE_SPEED
 	
 	if(is_on_floor()):
+		if not(moveX):
+			verticalVelocity = 0
 		if not($UILayer/UI.crafting):
 			if(Input.is_action_pressed("jump")):
 				verticalVelocity = -JUMP_SPEED

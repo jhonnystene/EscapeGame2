@@ -6,4 +6,4 @@
 + Mineral positions now saved
 + Generated chunks now saved
 + Debug data actually printed to debug console
-
++ Player no longer moves when player isn't pressing controls

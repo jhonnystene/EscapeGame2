@@ -158,6 +158,7 @@ func inventory_get_selected_item():
 	return "mining_beam"
 
 func inventory_add_item(itemId):
+	DebugConsole.echo("Inventory: Giving player 1 of " + itemId)
 	for item in inventory:
 		if(item.id == itemId):
 			item.count += 1
