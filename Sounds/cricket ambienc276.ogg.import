@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cricket ambienc276.ogg-e1f8cb23fc5175142cc381ef56ea7bf6.oggstr"
+
+[deps]
+
+source_file="res://Sounds/cricket ambienc276.ogg"
+dest_files=[ "res://.import/cricket ambienc276.ogg-e1f8cb23fc5175142cc381ef56ea7bf6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

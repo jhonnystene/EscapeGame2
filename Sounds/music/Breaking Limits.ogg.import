@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Breaking Limits.ogg-8adeeffc09137542c7336048a5e2986e.oggstr"
+
+[deps]
+
+source_file="res://Sounds/music/Breaking Limits.ogg"
+dest_files=[ "res://.import/Breaking Limits.ogg-8adeeffc09137542c7336048a5e2986e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

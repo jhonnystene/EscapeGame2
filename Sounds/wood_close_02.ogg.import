@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wood_close_02.ogg-8deb2a8d4287572dc805431146684058.oggstr"
+
+[deps]
+
+source_file="res://Sounds/wood_close_02.ogg"
+dest_files=[ "res://.import/wood_close_02.ogg-8deb2a8d4287572dc805431146684058.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

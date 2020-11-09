@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=2]
+[gd_scene load_steps=107 format=2]
 
 [ext_resource path="res://TitleScreen/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/titleAnim/out96.png" type="Texture" id=2]
@@ -103,6 +103,7 @@
 [ext_resource path="res://Sprites/titleAnim/out33.png" type="Texture" id=101]
 [ext_resource path="res://UI/ButtonStyles/Title/ButtonHoverStyle.tres" type="StyleBox" id=102]
 [ext_resource path="res://UI/ButtonStyles/Title/ButtonStyle.tres" type="StyleBox" id=103]
+[ext_resource path="res://Sounds/music/ambientmain_0.ogg" type="AudioStream" id=104]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -130,7 +131,7 @@ __meta__ = {
 position = Vector2( 512, 300 )
 scale = Vector2( 0.533, 0.556 )
 frames = SubResource( 1 )
-frame = 96
+frame = 72
 playing = true
 
 [node name="Title" type="Label" parent="."]
@@ -217,6 +218,10 @@ See LICENSE.TXT for more information."
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 104 )
+autoplay = true
 [connection signal="pressed" from="NewGameButton" to="." method="_on_NewGameButton_pressed"]
 [connection signal="pressed" from="LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 [connection signal="pressed" from="OptionsButton" to="." method="_on_OptionsButton_pressed"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wood_cracking_02.ogg-aff7f91cacf1bed6fab046f590870612.oggstr"
+
+[deps]
+
+source_file="res://Sounds/wood_cracking_02.ogg"
+dest_files=[ "res://.import/wood_cracking_02.ogg-aff7f91cacf1bed6fab046f590870612.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

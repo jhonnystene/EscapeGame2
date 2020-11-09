@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wood_falling_02.ogg-b7513f2a5b75fe00ca8599e1f0ffbda7.oggstr"
+
+[deps]
+
+source_file="res://Sounds/wood_falling_02.ogg"
+dest_files=[ "res://.import/wood_falling_02.ogg-b7513f2a5b75fe00ca8599e1f0ffbda7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

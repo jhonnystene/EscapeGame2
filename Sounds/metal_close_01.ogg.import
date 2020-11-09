@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/metal_close_01.ogg-261d2bd1dce150392f88826fe6276081.oggstr"
+
+[deps]
+
+source_file="res://Sounds/metal_close_01.ogg"
+dest_files=[ "res://.import/metal_close_01.ogg-261d2bd1dce150392f88826fe6276081.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 var verticalVelocity = 0
+var foot = 0
+var foot_left = preload("res://Sounds/Fantozzi-SandL1.ogg")
+var foot_right = preload("res://Sounds/Fantozzi-SandR1.ogg")
 
 func _process(delta):
 	if(GlobalData.inventory_is_mining_tool(GlobalData.inventory_get_selected_item())):
@@ -75,7 +78,10 @@ func _physics_process(delta):
 			verticalVelocity = -5
 	
 	if(moveX):
+		if(!$Footsteps.playing):
+			$Footsteps.play()
 		move_and_slide(Vector2(moveX, verticalVelocity), Vector2(0, -1))
 	else:
+		$Footsteps.stop()
 		if(verticalVelocity < 1 or !$RayCast2D.is_colliding()):
 			move_and_slide(Vector2(0, verticalVelocity), Vector2(0, -1))

@@ -3,12 +3,19 @@ extends Node2D
 var miningTime = 2
 var id = "test_rock"
 var color = Color(0, 0, 0)
+var framesWithoutMine = 0
 
 func _process(delta):
 	for rect in $Rock/Display.get_children():
 		rect.color = color
+	framesWithoutMine += 1
+	if(framesWithoutMine > 5):
+		$Rock/AudioStreamPlayer2D.stop()
 
 func mine(delta):
+	framesWithoutMine = 0
+	if(!$Rock/AudioStreamPlayer2D.playing):
+		$Rock/AudioStreamPlayer2D.play()
 	miningTime -= delta
 	if(miningTime < 0):
 		GlobalData.inventory_add_item(id)

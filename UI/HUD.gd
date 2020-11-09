@@ -11,6 +11,9 @@ func inventory_handle_queue():
 		GlobalData.inventory_queue.erase(item)
 
 func _process(delta):
+	#if(Input.is_action_just_pressed("scroll_down") or Input.is_action_just_pressed("scroll_up")):
+	#	$invsound.play()
+	
 	craftingRecipies = GlobalData.crafting_get_available_recipies()
 	if(Input.is_action_just_pressed("toggle_crafting")):
 		if(crafting):

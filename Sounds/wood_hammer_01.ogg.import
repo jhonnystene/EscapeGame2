@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wood_hammer_01.ogg-c813aab15093b1702aedddf5e8defe35.oggstr"
+
+[deps]
+
+source_file="res://Sounds/wood_hammer_01.ogg"
+dest_files=[ "res://.import/wood_hammer_01.ogg-c813aab15093b1702aedddf5e8defe35.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

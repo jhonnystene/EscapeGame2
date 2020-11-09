@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hammer_04.ogg-c829b2cd05f8846208fb5297cf0f0d97.oggstr"
+
+[deps]
+
+source_file="res://Sounds/hammer_04.ogg"
+dest_files=[ "res://.import/hammer_04.ogg-c829b2cd05f8846208fb5297cf0f0d97.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

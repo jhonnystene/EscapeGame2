@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wood_misc_03.ogg-a115b9e70ea903b32e99fd184e30fea1.oggstr"
+
+[deps]
+
+source_file="res://Sounds/wood_misc_03.ogg"
+dest_files=[ "res://.import/wood_misc_03.ogg-a115b9e70ea903b32e99fd184e30fea1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

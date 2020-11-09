@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://GameWorld/Entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://UI/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Sprites/light_shadow_light.png" type="Texture" id=3]
 [ext_resource path="res://Sprites/light.png" type="Texture" id=4]
+[ext_resource path="res://Sounds/Dark _Atmosphere13_Looped_24bit.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/footsteps.ogg" type="AudioStream" id=6]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 2, 4, 2 )
@@ -80,3 +82,13 @@ visible = false
 texture = ExtResource( 4 )
 texture_scale = 0.03
 energy = 0.28
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -8.238
+autoplay = true
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -8.238
+pitch_scale = 0.88
