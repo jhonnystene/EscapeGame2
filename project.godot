@@ -25,6 +25,7 @@ boot_splash/bg_color=Color( 0.129412, 0.14902, 0.247059, 1 )
 
 GlobalData="*res://GlobalData.gd"
 DebugConsole="*res://UI/DebugConsole.tscn"
+Physics="*res://Physics.gd"
 
 [display]
 

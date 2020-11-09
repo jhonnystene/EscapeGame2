@@ -1,8 +1,5 @@
 extends KinematicBody2D
 
-var MOVE_SPEED = 50
-var GRAVITY = 5
-var JUMP_SPEED = 100
 var verticalVelocity = 0
 
 func _process(delta):
@@ -59,16 +56,16 @@ func _physics_process(delta):
 		moveX = -int(Input.is_action_pressed("move_left"))
 		moveX += int(Input.is_action_pressed("move_right"))
 		
-	moveX *= MOVE_SPEED
+	moveX *= Physics.MOVE_SPEED
 	
 	if(is_on_floor()):
 		if not(moveX):
 			verticalVelocity = 0
 		if not($UILayer/UI.crafting):
 			if(Input.is_action_pressed("jump")):
-				verticalVelocity = -JUMP_SPEED
+				verticalVelocity = -Physics.JUMP_SPEED
 	else:
-		verticalVelocity += GRAVITY
+		verticalVelocity += Physics.GRAVITY
 	
 	# This works around a quirk in the Godot physics engine that makes it
 	# damn near impossible to go up the slopes in the game.

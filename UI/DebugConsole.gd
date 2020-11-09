@@ -1,6 +1,7 @@
 extends Control
 
 func echo(text):
+	text = str(text)
 	$ConsoleDisplay.text = $ConsoleDisplay.text + text + "\n"
 
 func _on_RunButton_pressed():
@@ -12,7 +13,7 @@ func _on_RunButton_pressed():
 	args.remove(0)
 	
 	if(command == "help"):
-		echo("help give save load legal")
+		echo("help give save load legal gravity movespeed jumpspeed")
 	elif(command == "give"):
 		if(len(args) == 1):
 			args.append("1")
@@ -27,6 +28,21 @@ func _on_RunButton_pressed():
 			$LicenseDisplay.visible = false
 		else:
 			$LicenseDisplay.visible = true
+	elif(command == "gravity"):
+		if(len(args) == 0):
+			echo(Physics.GRAVITY)
+		else:
+			Physics.GRAVITY = int(args[0])
+	elif(command == "movespeed"):
+		if(len(args) == 0):
+			echo(Physics.MOVE_SPEED)
+		else:
+			Physics.MOVE_SPEED = int(args[0])
+	elif(command == "jumpspeed"):
+		if(len(args) == 0):
+			echo(Physics.JUMP_SPEED)
+		else:
+			Physics.JUMP_SPEED = int(args[0])
 	
 	else:
 		echo("Unknown command")
