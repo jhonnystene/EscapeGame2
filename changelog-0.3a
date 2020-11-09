@@ -9,3 +9,4 @@
 + Player no longer moves when player isn't pressing controls
 + Added physics commands to debug menu
 + Increased mineral size
++ Tweaked lighting
