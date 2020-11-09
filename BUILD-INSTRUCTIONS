@@ -1,0 +1,14 @@
+Build Instructions for Escape The Robots And Oh Gosh They're Coming Run 2: The Better One
+
+Requires Godot Engine 3.2.
+
+1. Open Godot
+2. Click "Scan"
+3. Select the directory for the Escape The Robots And Oh Gosh They're Coming Run 2: The Better One
+4. Double-click Escape The Robots And Oh Gosh They're Coming Run 2: The Better One
+5. Click "Project" -> "Export"
+6. Click "Add"
+7. Choose your desired platform
+8. Click the folder next to "Export Path"
+9. Choose a path to export the binary to
+10. Click "Export All"
